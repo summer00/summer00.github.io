@@ -2,13 +2,13 @@
 title: Summer's blog
 email: xiaright00@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Hi, this is a place where i share my opinion of tech.
+  Hi, this is a place where i share my opinion.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  summer00
 
 # Build settings
-markdown: kramdown
+
 theme: minima
 plugins:
   - jekyll-feed
