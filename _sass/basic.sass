@@ -12,7 +12,7 @@ a
   text-decoration: inherit
   transition: color .2s ease-out
   &.selected, &:hover
-    color: reduce(100)
+    color: #565656
 
 a, b, strong, th
   font-weight: 400
@@ -24,7 +24,10 @@ main
   flex-grow: 1
 
 article a
-  color: #68f
+  color: #336699
+  transition: color .2s ease-out
+  &.selected, &:hover
+    color: reduce(100)
 
 header a, footer a
   color: inherit
@@ -38,7 +41,7 @@ header span, header time
   color: #949494
 
 blockquote
-  border-left: 5px solid #68f
+  border-left: 5px solid #336699
   padding-left: 1.5em
   margin: 0
 
@@ -52,3 +55,12 @@ img
 
 figure
   margin: 1em 0
+
+article header h1
+  font-size: 24px
+
+article h1
+  font-size: 20px
+
+article
+  font-size: 16px

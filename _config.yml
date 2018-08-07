@@ -4,9 +4,9 @@ description: "A simple tech blog"
 more: "read more »"
 url: "https://summer00.github.io/"
 baseurl: ""
-paginate: 2
+paginate: 3
 permalink: pretty
-excerpt_separator: "\n\n\n" # two blank lines
+excerpt_separator: "\n\n" # two blank lines
 
 style:
   minimalist: false
@@ -18,7 +18,7 @@ navigation:
   - tags.md
 
 comments:
-  disqus: "disqus-contrast"
+  disqus: "summer00"
 #  isso: "comments.mysite.org"
 
 links: # see http://fontawesome.io/icons/#brand for all possible icons
