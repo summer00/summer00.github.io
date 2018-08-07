@@ -6,7 +6,7 @@ url: "https://summer00.github.io/"
 baseurl: ""
 paginate: 3
 permalink: pretty
-excerpt_separator: "\n\n" # two blank lines
+excerpt_separator: <!--more-->
 
 style:
   minimalist: false
@@ -16,6 +16,7 @@ navigation:
   - index.html
   - archive.html
   - tags.md
+  - about.md
 
 comments:
   disqus: "summer00"
