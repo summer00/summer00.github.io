@@ -1,5 +1,4 @@
 ---
-layout: post
 title:  "JVM 概览"
 date:   2018-08-03 15:37:48 +0800
 categories: [jvm, summary]

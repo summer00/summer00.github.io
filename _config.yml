@@ -1,26 +1,29 @@
+title: "Summer Blog"
+author: "summer00"
+description: "A simple tech blog"
+more: "read more »"
+url: "https://summer00.github.io/"
+baseurl: ""
+paginate: 2
+permalink: pretty
+excerpt_separator: "\n\n\n" # two blank lines
 
-title: Summer's blog
-email: xiaright00@gmail.com
-description: >- # this means to ignore newlines until "baseurl:"
-  Hi, this is a place where i share my opinion.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
-github_username:  summer00
+style:
+  minimalist: false
+  dark: false
 
-# Build settings
+navigation:
+  - index.html
+  - archive.html
+  - tags.md
 
-theme: minima
-plugins:
-  - jekyll-feed
+comments:
+  disqus: "disqus-contrast"
+#  isso: "comments.mysite.org"
 
-# Exclude from processing.
-# The following items will not be processed, by default. Create a custom list
-# to override the default setting.
-# exclude:
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+links: # see http://fontawesome.io/icons/#brand for all possible icons
+  - github: "https://github.com/summer00"
+
+defaults: [{scope: {path: ""}, values: {layout: "default"}}, {scope: {path: "", type: "posts"}, values: {comments: true}}]
+sass: {style: expanded}
+plugins: [jekyll-feed, jekyll-paginate]
