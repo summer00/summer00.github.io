@@ -7,7 +7,7 @@ title: "Tags"
 
 <ul>
     {% for post in category.last %}
-        <li><a href="{{ post.url }}">{{ post.title }}</a> {{ post.date | date:"%d/%m/%Y"}}</li>
+        <li> {{ post.date | date:"%Y-%m-%d"}} <a href="{{ post.url }}">{{ post.title }}</a></li>
     {% endfor %}
 </ul>
 
