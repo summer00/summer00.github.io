@@ -1,5 +1,5 @@
 ---
-title:  "分布式系统"
+title:  "分布式系统一致性"
 date:   2018-08-20 15:00:00 +0800
 categories: [distributed]
 ---
