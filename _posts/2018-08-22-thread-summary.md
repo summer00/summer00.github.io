@@ -24,6 +24,8 @@ categories: [summary]
 
 # 线程安全问题
 
+出现的条件：1)多线程 2)共享资源 3)非原子性操作
+
 ## synchronized原理
 
 * 可重入、互斥锁
@@ -31,12 +33,12 @@ categories: [summary]
 * synchronized用的锁是存在Java对象头里的（mark word）
 * 实现：JVM基于进入和退出Monitor对象来实现方法同步和代码块同步。代码块同步是使用monitorenter和monitorexit指令实现的，monitorenter指令是在编译后插入到同步代码块的开始位置，而monitorexit是插入到方法结束处和异常处。任何对象都有一个monitor与之关联，当且一个monitor被持有后，它将处于锁定状态。根据虚拟机规范的要求，在执行monitorenter指令时，首先要去尝试获取对象的锁，如果这个对象没被锁定，或者当前线程已经拥有了那个对象的锁，把锁的计数器加1；相应地，在执行monitorexit指令时会将锁计数器减1，当计数器被减到0时，锁就释放了。如果获取对象锁失败了，那当前线程就要阻塞等待，直到对象锁被另一个线程释放为止
 
-## 偏向锁
+### 偏向锁
 
 * 解决问题：减少无实际竞争情况下，使用重量级锁产生的性能消耗
 * 实现：一个线程第一次来访问互斥资源，则在对象头和栈帧的锁记录中存储偏向锁的线程ID(可以理解为获取“锁”的动作)。偏向锁在获取锁之后，直到有竞争出现才会释放锁。第二个线程尝试获得偏向锁，若成功则第二个线程获得该偏向锁，否则膨胀成轻量级锁
 
-## 轻量级锁
+### 轻量级锁
 
 * 解决问题：自旋锁的目标是降低线程切换的成本
 * 实现：使用轻量级锁时，不需要申请互斥量，仅仅_将Mark Word中的部分字节CAS更新指向线程栈中的Lock Record，如果更新成功，则轻量级锁获取成功_，记录锁状态为轻量级锁；否则，说明已经有线程获得了轻量级锁，目前发生了锁竞争（不适合继续使用轻量级锁），接下来膨胀为重量级锁
@@ -46,5 +48,6 @@ categories: [summary]
 * 被volatile修饰的变量，在线程之间是可见的
 
 # 参考
-https://juejin.im/post/5a5c09d051882573282164ae
-https://kaimingwan.com/post/java/javanei-zhi-suo-kai-xiao-you-hua-pian-xiang-suo-qing-liang-ji-suo#toc_17
+
+1. https://juejin.im/post/5a5c09d051882573282164ae
+2. https://kaimingwan.com/post/java/javanei-zhi-suo-kai-xiao-you-hua-pian-xiang-suo-qing-liang-ji-suo#toc_17
