@@ -39,3 +39,6 @@ Checked Exception，继承自`Exception`，必须被显式地捕获或者传递�
 
 AOP 面向切面编程，生成代理类
 
+# 分布式缓存设计
+
+## 问题与解决
