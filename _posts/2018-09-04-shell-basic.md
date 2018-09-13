@@ -4,8 +4,6 @@ date:   2018-09-04 15:00:00 +0800
 categories: [note]
 ---
 
-# Day 1
-
 ## jobs 任务
 
 ```shell
@@ -70,4 +68,21 @@ echo $name      # $name xx
 name=xx
 name="$name xx" # 双引号，使用name中的值
 echo $name      # xx xx
+```
+
+## 数组
+
+```shell
+A=(1, 2, 3)                             # 定义数组A
+echo ${A[0]}                            # 访问A中第一个元素
+echo ${A[@]}                            # 访问A中所有元素
+echo ${#A[@]}                           # 输出长度
+for i={0..2}; do echo ${A[i]}; done     # 遍历
+```
+
+## Here Document
+
+```shell
+cat>file<<ENDF
+ENDF                # 多行输出
 ```
