@@ -30,8 +30,44 @@ wc -l /temp/f   # 使用管道
 
 <!--more-->
 
-## 结构
+## 内部命令
 
 ```shell
+#!/bin/bash # 设置执行器
 
+type who        # 查看命令的类型
+help            # 查看帮助
+alias g='git'   # 别名
+echo '123'      # 打印
+pwd             # 打印当前路径
+cd              # 改变路径
+：              # 空操作，永真
+```
+
+# 常用外部命令
+
+```shell
+head -n 1 test.sh           # 查看test.sh第一行
+tail -n 1 test.sh           # 查看test.sh最后一行
+echo a:b:c:d | cut -d: f1   # 剪切
+basename /test/test.sh      # strip directory and suffix from filenames
+mkdir -p a/b/c              # 创建目录
+rm -rf a                    # 强制删除
+sort -rn nums.test          # 排序 -n 按数字 -r 逆序
+ls a && echo find || echo no find #连接符号
+```
+
+## 变量
+
+```shell
+name=xx         # 初始化
+echo $name      # 输出xx
+unset name      # 删除name里的值
+echo $name      # 输出空行
+name=xx
+name='$name xx' # 单引号，不使用name中存储的值
+echo $name      # $name xx
+name=xx
+name="$name xx" # 双引号，使用name中的值
+echo $name      # xx xx
 ```
