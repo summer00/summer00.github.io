@@ -15,6 +15,7 @@
     ```
     SELECT * FROM products WHERE id<>'3' FOR UPDATE;
     ```
+<!--more-->
 
 2. 数据库容量
     
