@@ -20,6 +20,11 @@ categories: [summary]
 - [JDK源码](#jdk%E6%BA%90%E7%A0%81)
   - [JDK线程池实现](#jdk%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%AE%9E%E7%8E%B0)
   - [CurrentHashMap实现](#currenthashmap%E5%AE%9E%E7%8E%B0)
+  - [concurrent包中的类](#concurrent%E5%8C%85%E4%B8%AD%E7%9A%84%E7%B1%BB)
+    - [CyclicBarrier](#cyclicbarrier)
+    - [CountDownLatch](#countdownlatch)
+    - [Semaphore](#semaphore)
+    - [总结](#%E6%80%BB%E7%BB%93)
 - [Spring](#spring)
   - [Spring IOC](#spring-ioc)
   - [流程](#%E6%B5%81%E7%A8%8B)
@@ -32,16 +37,23 @@ categories: [summary]
 - [分布式缓存设计](#%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%E8%AE%BE%E8%AE%A1)
   - [问题与解决](#%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3)
 - [MySQL](#mysql)
+  - [锁](#%E9%94%81)
   - [隔离级别](#%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB)
   - [索引](#%E7%B4%A2%E5%BC%95)
 - [Tips](#tips)
   - [`Error`和`Exception`](#error%E5%92%8Cexception)
   - [覆盖`equals()`](#%E8%A6%86%E7%9B%96equals)
+  - [重写（overloading）与重载（overwrite）](#%E9%87%8D%E5%86%99overloading%E4%B8%8E%E9%87%8D%E8%BD%BDoverwrite)
+  - [final, finally, finalize](#final-finally-finalize)
+  - [Object类方法](#object%E7%B1%BB%E6%96%B9%E6%B3%95)
 - [微服务](#%E5%BE%AE%E6%9C%8D%E5%8A%A1)
   - [什么是](#%E4%BB%80%E4%B9%88%E6%98%AF)
   - [优点](#%E4%BC%98%E7%82%B9)
   - [挑战](#%E6%8C%91%E6%88%98)
   - [设计原则](#%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99)
+- [消息中间件](#%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6)
+  - [为什么使用](#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8)
+  - [rabbitMQ](#rabbitmq)
 
 # JVM
 
@@ -124,6 +136,30 @@ categories: [summary]
 
 ## CurrentHashMap实现
 
+## concurrent包中的类
+
+### CyclicBarrier
+
+字面意思回环栅栏，通过它可以实现让一组线程等待至某个状态之后再全部同时执行。叫做回环是因为当所有等待线程都被释放以后，CyclicBarrier可以被重用。我们暂且把这个状态就叫做barrier，当调用await()方法之后，线程就处于barrier了。
+
+### CountDownLatch
+
+利用它可以实现类似计数器的功能。比如有一个任务A，它要等待其他4个任务执行完毕之后才能执行，此时就可以利用CountDownLatch来实现这种功能了。
+
+### Semaphore
+
+Semaphore翻译成字面意思为 信号量，Semaphore可以控同时访问的线程个数，通过 acquire() 获取一个许可，如果没有就等待，而 release() 释放一个许可。
+
+### 总结
+
+* CountDownLatch和CyclicBarrier都能够实现线程之间的等待，只不过它们侧重点不同：
+  * CountDownLatch一般用于某个线程A等待若干个其他线程执行完任务之后，它才执行；
+  * 而CyclicBarrier一般用于一组线程互相等待至某个状态，然后这一组线程再同时执行；
+  * CountDownLatch是不能够重用的，而CyclicBarrier是可以重用的。
+* Semaphore其实和锁有点类似，它一般用于控制对某组资源的访问权限。
+
+
+
 # Spring
 
 ## Spring IOC
@@ -164,7 +200,37 @@ AOP 面向切面编程，生成代理类
 
 # MySQL
 
+## 锁
+
+粒度：服务器，表，行
+* MyISAM：支持服务器和表级锁
+* InnoDB：都支持。行级锁锁定的是索引，所以没有索引会直接锁表
+
+表级锁与后续操作关系
+| 关系    | A读  | A写  | B读  | B写  | B加读 | B加写 |
+|---------|------|------|------|------|-------|-------|
+| A加读表 | 可以 | 报错 | 可以 | 阻塞 | 可以  | 阻塞  |
+| A加写表 | 可以 | 可以 | 阻塞 | 阻塞 | 阻塞  | 阻塞  |
+
+行级锁与后续操作关系
+|  关系     |       |       |       |       |       |
+|  ---  |  ---  |  ---  |  ---  |  ---  |  ---  |
+|  A加行共享锁     |       |       |       |       |       |
+|  A加行派他锁     |       |       |       |       |       |
+
+意象锁：简化加行级别锁后，再加表锁时的check
+
 ## 隔离级别
+
+ACID:原子，一致性，隔离性，持久性
+
+|                         | 脏读 | 不可重复读 | 幻读 |
+|-------------------------|------|------------|------|
+| read uncommit           | Y    | Y          | Y    |
+| read commited           | N    | Y          | Y    |
+| reaptable read(default) | N    | N          | Y    |
+| serializable            | N    | N          | N    |
+
 
 ## 索引
 
@@ -191,6 +257,29 @@ Checked Exception，继承自`Exception`，必须被显式地捕获或者传递�
 
 * 覆盖equals时总要覆盖hashCode：如果不这样做的话，就会违反Object.hashcode的通用约定，如果两个对象根据equals(Object)方法比较是相等的，那么调用这两个对象中任意一个对象的hashCode方法都必须产生同样的整数结果
 * 不要将equals声明中的Object对象替换为其他的类型
+
+## 重写（overloading）与重载（overwrite）
+
+重写是在同一个类中定义的方法名相同但参数不同的一组函数；重载是子类中重写父类中方法，必须与父类中方法同名且参数一致，子类的访问性不能小于父类的定义
+
+## final, finally, finalize
+
+* final可修饰类（不能被继承），方法（不能被重载），变量（只能赋值一次）
+* finally用于异常处理，表示这段语句最终一定会被执行（不管有没有抛出异常）
+* finalize()是在java.lang.Object里定义的，也就是说每一个对象都有这么个方法。这个方法在gc启动，该对象被回收的时候被调用。
+
+## Object类方法
+
+* `getClass()`:final方法，获得运行时类型。
+* `hashCode()`:返回该对象的哈希码值，若`a.equals(b)==true`则`a.hashCode()=b.hashCode()`，反之不一定
+* `equals()`:比较对象是否相等
+* `notify()`:用于唤醒正在等待当前对象监视器的线程，唤醒的线程是随机的
+* `notifyAll()`:用于唤醒所有等待对象监视器锁的线程，notify只唤醒所有等待线程中的一个
+* `wait()`,`wait(long timeout)`,`wait(long timeout, int nanos)`:一般和上面说的notify方法搭配使用。一个线程调用一个对象的wait方法后，线程将进入WAITING状态或者TIMED_WAITING状态。直到其他线程唤醒这个线程。
+* `finalize`:垃圾回收器在回收一个无用的对象的时候，会调用对象的finalize方法，我们可以覆写对象的finalize方法来做一些清除工作
+* `toString()`:默认class的名称+对象的哈希码。一般在子类中我们可以对这个方法进行覆写
+* `clone()`:用于克隆一个对象，被克隆的对象需要implements Cloneable接口，否则调用这个对象的clone方法，将会抛出CloneNotSupportedException异常
+
 
 # 微服务
 
@@ -221,3 +310,14 @@ Checked Exception，继承自`Exception`，必须被显式地捕获或者传递�
 * 轻量级，通用性通信协议
 * 服务自治
 * 接口明确
+
+# 消息中间件
+
+## 为什么使用
+
+* 解耦：多应用间通过消息队列对同一消息进行处理，避免调用接口失败导致整个过程失败；
+* 限流削峰:广泛应用于秒杀或抢购活动中，避免流量过大导致应用系统挂掉的情况；
+* 异步：多应用对消息队列中同一消息进行处理，应用间并发处理消息，相比串行处理，减少处理时间；
+* 消息驱动的系统：系统分为消息队列、消息生产者、消息消费者，生产者负责产生消息，消费者(可能有多个)负责对消息进行处理；
+
+## rabbitMQ
