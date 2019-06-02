@@ -1,3 +1,9 @@
+---
+title:  "MySQL使用注意点"
+date:   2019-01-09 15:00:00 +0800
+categories: [database]
+---
+
 1. select for update 锁表情况
     对于表products,有两列id和name,id是主键列,name是索引
    
