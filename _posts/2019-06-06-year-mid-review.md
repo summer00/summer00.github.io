@@ -6,8 +6,23 @@ categories: [note]
 
 # 2019年中总结
 
-## 技术篇
+## 完成的事
 
-## 项目篇
+### 技术学习
+* MySQL（事务，锁，索引，优化）
+* Oracle（特殊写法，优化，执行计划）
+* Spring原理
 
-## flag
+### 项目
+
+* 独立负责一个项目
+* Spring Security
+
+## TODO
+
+* NIO
+* Netty
+* Kafka
+* Concurrency
+* Python(AI)
+* 分布式
