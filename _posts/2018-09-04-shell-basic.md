@@ -1,7 +1,7 @@
 ---
 title:  "Shell学习笔记"
 date:   2018-09-04 15:00:00 +0800
-categories: [note]
+categories: [summary]
 ---
 
 ## jobs 任务
