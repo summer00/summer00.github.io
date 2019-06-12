@@ -17,6 +17,7 @@ navigation:
   - archive.html
   - tags.md
   - about.md
+  - words.md
 
 comments:
   disqus: "summer00"

@@ -19,7 +19,10 @@
 * 让数据库处理数据密集型操作
 * 使用缓存避免重复读取相同数据
 * 批处理`update`和`delete`操作
+
 ![ hibernate cache ]({{ "/assets/2019-06-03-1.png" | absolute_url }})
+
+<!--more-->
 
 # Mybatis
 
