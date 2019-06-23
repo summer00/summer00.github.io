@@ -33,6 +33,7 @@ ORA-12505, TNS:listener does not currently know of SID given in connect descript
   )
 )
 ```
+<!--more-->
 
 ## Oracle的SID和SERVICE_NAME
 
