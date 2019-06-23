@@ -62,3 +62,12 @@ Don't waste your time on trivial things.
 Don't intervene in their dispute.
 * intervene 干涉(v)
 * dispute 争吵
+
+# 19/06/19
+
+## 墨墨单词
+
+The police institute a new investigation.
+* police 警察
+* institute 开创(v)，开始(v)，协会(n)，机构(n)
+* investigation 调查(n)，研究(n)
