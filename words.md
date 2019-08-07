@@ -71,3 +71,57 @@ The police institute a new investigation.
 * police 警察
 * institute 开创(v)，开始(v)，协会(n)，机构(n)
 * investigation 调查(n)，研究(n)
+
+# 19/07/09
+
+## Learn how to learn
+
+We're going to use an **analogy** of the game of pinball to help us understand these two thinking modes.
+* analogy 比喻
+
+**In some sense** it's as if it's traveling along a familiar, nicely **paved** road.
+* in some sense 从某种意义上说
+* paved 被铺好的
+
+Whether you're a **novice** or an **expert**, you will find great new ways to improve your skills and techniques for learning, especially related to math and **science**. 
+* novice 新手
+* expert 专家
+* technique 技术
+
+You will hear **experts** from a **variety** of different **disciplines** talking about their best tips for learning more **effectively**.
+* variety 变化(n)
+* disciplines 训练(n),惩罚(v),管教(v)
+
+# 19/07/23
+
+## The 7 habits or highly effective people
+
+Here sat a master teacher, one of the most influential thinkers of the day, and he wanted to learn form  someone twenty-five years his junior.
+* influential 有很大影响力的
+* junior 地位地下的，青少年的
+
+Covey created a "user interface" organize into a coherent conceptual framework, made a highly accessible by Covey's strong writing.
+* coherent 一致的
+* conceptual 概念的，构思的
+
+Prior to Apple and Microsoft, few people could harness computers to their daily lives; there was no easily accessible user interface -- there were no mouse pointers, friendly icons, or overlapping windows on a screen, let alone a touch screen.
+* prior to 在前 
+* harness sth. to sth. 控制，利用（以生产）;给马上挽具 
+* let alone 更不用说
+
+Some of conceptual wrapping paper worked exceptionally well, being both descriptive of a concept, and at the same time prescriptive in its application.
+
+# 2019/07/25
+
+## synonym in Chinese
+
+* exhaust, deplete
+* anticipate, predict
+* stage, phase
+* discard, deprive
+* committee, council
+
+# 2019/07/30
+
+## The 7 habits or highly effective people
+
