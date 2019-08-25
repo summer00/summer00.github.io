@@ -27,6 +27,8 @@ categories: [linux]
 
 ![data-package ]({{ "/assets/data-package.jpg" | absolute_url }})
 
+<!--more-->
+
 ## 常用网络设备
 
 集线器 --> 交换机 --> 网桥 --> 路由器 --> 网关

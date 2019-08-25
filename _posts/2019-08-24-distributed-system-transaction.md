@@ -1,7 +1,7 @@
 ---
 title:  "分布式事务"
 date:   2019-08-16 12:00:00 +0800
-categories: [distributed-system]
+categories: [distributed]
 ---
 
 # XA
