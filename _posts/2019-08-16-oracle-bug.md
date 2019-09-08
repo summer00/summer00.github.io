@@ -1,7 +1,7 @@
 ---
 title:  "Oracle排序bug"
 date:   2019-08-16 12:00:00 +0800
-categories: [bug-snapshot]
+categories: [bug-snapshot, database]
 ---
 
 之前，同事写了一个单表查询带排序，但是调用多了之后，直接把Oracle数据库搞挂了。按理说Oracle这个东西不可能这么脆弱，10几个线程去连接跑查询就把它hang住，连接都连接不上。

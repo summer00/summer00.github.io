@@ -1,7 +1,7 @@
 ---
 title:  "Oracle错误码"
 date:   2019-06-23 15:00:00 +0800
-categories: [bug-snapshot]
+categories: [bug-snapshot, database]
 ---
 
 最近才开始使用Oracle，踩了很多坑比较惨兮兮的，这里我来记录一下遇到的错误码，做一个总结吧。
