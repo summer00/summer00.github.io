@@ -23,6 +23,8 @@ We have three main goals:
 * It's important in the early days of a new relationship to pay attention to how you're feeling.
 * It's also really important to start practicing using your voice to talk about your own needs.
 
+<!--more-->
+
 ## isolation
 
 * solation creeps in when your new boyfriend or girlfriend starts pulling you away from your friends and family, your support system, and tethering you more tightly to them.
