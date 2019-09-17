@@ -16,7 +16,7 @@ categories: [database]
 
 ## 集群管理
 
-```json
+```
 GET /_cat/health?v  // 了解集群健康状态，green:每个索引的shard和replica都是可用的yellow：所以的shard可用，部分replica不可用；red：部分shard不可用
 
 GET /_cat/indices?v // 查看有哪些索引
@@ -26,7 +26,7 @@ GET /_cat/indices?v // 查看有哪些索引
 
 ## 索引操作
 
-```json
+```
 PUT /{index-name}/pretty // 创建
 DELETE /{index-name}/pretty // 删除
 GET /{index-name}/_mapping // 获取index的mapping类型
@@ -34,7 +34,7 @@ GET /{index-name}/_mapping // 获取index的mapping类型
 
 ## 文档操作
 
-```json
+```
 PUT /{index-name}/_doc/1 //创建
 {
     "user" : "kimchy",
@@ -54,7 +54,7 @@ DELETE /{index-name}/{id} // 删除
 
 ## 批量操作
 
-```json
+```
 GET /_mget // 批量查询
 GET /{index-name}/_mget // 同一个index下批量查询
 GET /{index-name}/_doc/_mget // 同一个index和type下批量查询
@@ -89,9 +89,10 @@ POST /{index-name}/_bulk
 
 ## 搜索
 
-```json
+```
 // 使用size和from可以分页查询
 // es是分布式系统，分页每个node需要返回的是截至前的所有数据，交给coordinate node进行排序，所以会产生deep paging问题
+// index和type都可以使用通配符
 GET /[{index1},{index2}]/[{type1},{type2}]/_search?size=10&from=0 //搜索
 
 // +表示必须包含value；-表示必须不包含

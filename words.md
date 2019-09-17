@@ -125,3 +125,11 @@ Some of conceptual wrapping paper worked exceptionally well, being both descript
 
 ## The 7 habits or highly effective people
 
+# 2019/09/16
+
+## All ears English
+
+* how to challenge someone
+  * I beg your pardon
+  * I take a issue with that
+  * Let's just agree to disagree
