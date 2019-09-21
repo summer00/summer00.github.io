@@ -98,6 +98,9 @@ GET /[{index1},{index2}]/[{type1},{type2}]/_search?size=10&from=0 //搜索
 // +表示必须包含value；-表示必须不包含
 // 不添加field表示对每一个field进行搜索，使用es内置的_all字段（所有值拼在一起）
 GET /_search?q=[+/-][{field}:]{value} // query string
+
+// 获取数据类型
+GET /{index-name}/_mapping
 ```
 
 # 分布式架构
@@ -146,8 +149,9 @@ GET /_search?q=[+/-][{field}:]{value} // query string
 
 1. 客户端选择一个node发送请求，这个node就是coordinating node（协调节点）
 2. coordinating node将document进行路由，转发给对应的shard
-3. shard所在的node处理请求，并将信息同步给replica
-4. coordinating node发现shard所在node完成操作后，返回结果给客户端
+3. shard所在的node处理请求，并将信息同步给replica。当所有replica同步成功后，shard将消息报告给coordinating node，coordinating node将消息报告给客户端
+    * consistency，一致性。值可以设为 one （只要主分片状态 ok 就允许执行_写_操作）,`all`（必须要主分片和所有副本分片的状态没问题才允许执行_写_操作）, 或 `quorum` 。默认值为 quorum , 即大多数的分片副本状态没问题就允许执行_写_操作。算法`int( (primary + number_of_replicas) / 2 ) + 1`
+    * timeout，当没有足够副本时会等待，默认为1分钟，可以自行设置
 
 ## 读请求操作过程
 
@@ -160,4 +164,21 @@ GET /_search?q=[+/-][{field}:]{value} // query string
 
 ## 倒排索引
 
+* 正排索引：文档id到单词的关联关系
+* 倒排索引：单词到文档id的关联关系；一般由单词词典和倒排表组成
+
 ## 分词器
+
+1. character filter：预处理，去除干扰项目
+2. tokenizer：分词
+3. token filter：大小写，去停，同义词；
+
+## 搜索模式
+
+* exact value：搜索时必须是和关键字相同
+* full text：全文检索；缩写，大小写转换，词性装换，同义词等情况也能搜索出来
+
+## filter与query的区别
+
+* filter只过滤，对相关度没有影响，性能较好
+* query会计算搜索的相关度，并进行排序
