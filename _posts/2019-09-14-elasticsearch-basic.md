@@ -101,6 +101,18 @@ GET /_search?q=[+/-][{field}:]{value} // query string
 
 // 获取数据类型
 GET /{index-name}/_mapping
+
+// 判断查询是否合法，request body为要验证的查询对象
+GET /{index-name}/{type}/_validate/query?explain
+
+// 滚动搜索，1m为失效时间，request body为查询对象，该操作会返回scroll_id
+GET /{index-name}/{type}/_search?scroll=1m
+// 滚动搜索之后的内容
+GET /_search/scroll
+{
+    "scroll": 1m,
+    "scroll_id": 123132
+}
 ```
 
 # 分布式架构
@@ -173,6 +185,8 @@ GET /{index-name}/_mapping
 2. tokenizer：分词
 3. token filter：大小写，去停，同义词；
 
+## mapping
+
 ## 搜索模式
 
 * exact value：搜索时必须是和关键字相同
@@ -182,3 +196,33 @@ GET /{index-name}/_mapping
 
 * filter只过滤，对相关度没有影响，性能较好
 * query会计算搜索的相关度，并进行排序
+
+## 搜索类型
+
+* match_all：查询所有
+* match：某个field是否包含查询的词
+* multi_match：对应多个field是否包含查询
+* range：范围
+* term：不会对查询语句分词，整个查询
+* terms_query: 某个字段指定多个不分词的关键字
+
+## 搜索连接词
+
+* bool
+  * must：必须
+  * must_not：必须不
+  * should：可以
+  * filter：必须过滤，不影响评分
+
+## 排序
+
+* 默认：按照_source排序
+* 自定义：在查询对象加入`sort`对象
+
+## 分数算法
+
+es使用：term frequency/inverse document frequency算法，简写为TF/IDF
+* TF: 搜索文本在个词条的field出现的次数，越多越相关
+* IDF：搜索文本在整个索引中出现的次数，越多越不相关
+* field length norm：field越长，越不相关
+  
