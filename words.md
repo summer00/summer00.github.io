@@ -133,3 +133,45 @@ Some of conceptual wrapping paper worked exceptionally well, being both descript
   * I beg your pardon
   * I take a issue with that
   * Let's just agree to disagree
+
+# 2019/10/22
+
+## All ears English
+
+* Tow horses around
+* Hold your horses
+
+## 墨墨单词
+
+* Love and reason do not go together.
+* English is her mother tongue.
+* The opportunity has not yet arrived.
+* My main concern is the welfare of the children.
+* Tell him the truth at an appropriate time.
+
+## synonym
+
+* 巨大的
+  * enormous
+  * tremendous
+  * immense
+  * massive
+
+# 2019/10/23
+
+## 墨墨单词
+
+* Can you analyze the structure of the sentence for me?
+* Nuclear weapon is a threat to human.
+* She is a sophisticated journalist.
+* It seems we have a consensus.
+* That does not regard me
+  
+# 2019/10/24
+
+## 墨墨单词
+
+* I am in entire agreement with you.
+* steady income
+* lexical concept
+* I impress him as a scholar.
