@@ -4,6 +4,35 @@ date:   2019-09-14 12:00:00 +0800
 categories: [database]
 ---
 
+- [基本概念](#%e5%9f%ba%e6%9c%ac%e6%a6%82%e5%bf%b5)
+- [基本接口](#%e5%9f%ba%e6%9c%ac%e6%8e%a5%e5%8f%a3)
+  - [集群管理](#%e9%9b%86%e7%be%a4%e7%ae%a1%e7%90%86)
+  - [索引操作](#%e7%b4%a2%e5%bc%95%e6%93%8d%e4%bd%9c)
+  - [文档操作](#%e6%96%87%e6%a1%a3%e6%93%8d%e4%bd%9c)
+  - [批量操作](#%e6%89%b9%e9%87%8f%e6%93%8d%e4%bd%9c)
+  - [搜索](#%e6%90%9c%e7%b4%a2)
+- [分布式架构](#%e5%88%86%e5%b8%83%e5%bc%8f%e6%9e%b6%e6%9e%84)
+  - [路由](#%e8%b7%af%e7%94%b1)
+  - [容错的机制](#%e5%ae%b9%e9%94%99%e7%9a%84%e6%9c%ba%e5%88%b6)
+  - [并发冲突](#%e5%b9%b6%e5%8f%91%e5%86%b2%e7%aa%81)
+- [数据存储](#%e6%95%b0%e6%8d%ae%e5%ad%98%e5%82%a8)
+  - [document id](#document-id)
+  - [_source元数据](#source%e5%85%83%e6%95%b0%e6%8d%ae)
+  - [替换，删除](#%e6%9b%bf%e6%8d%a2%e5%88%a0%e9%99%a4)
+  - [增删改操作过程](#%e5%a2%9e%e5%88%a0%e6%94%b9%e6%93%8d%e4%bd%9c%e8%bf%87%e7%a8%8b)
+  - [读请求操作过程](#%e8%af%bb%e8%af%b7%e6%b1%82%e6%93%8d%e4%bd%9c%e8%bf%87%e7%a8%8b)
+  - [写入更新索引内部逻辑（todo）](#%e5%86%99%e5%85%a5%e6%9b%b4%e6%96%b0%e7%b4%a2%e5%bc%95%e5%86%85%e9%83%a8%e9%80%bb%e8%be%91todo)
+- [搜索](#%e6%90%9c%e7%b4%a2-1)
+  - [倒排索引](#%e5%80%92%e6%8e%92%e7%b4%a2%e5%bc%95)
+  - [分词器](#%e5%88%86%e8%af%8d%e5%99%a8)
+  - [mapping](#mapping)
+  - [搜索模式](#%e6%90%9c%e7%b4%a2%e6%a8%a1%e5%bc%8f)
+  - [filter与query的区别](#filter%e4%b8%8equery%e7%9a%84%e5%8c%ba%e5%88%ab)
+  - [搜索类型](#%e6%90%9c%e7%b4%a2%e7%b1%bb%e5%9e%8b)
+  - [搜索连接词](#%e6%90%9c%e7%b4%a2%e8%bf%9e%e6%8e%a5%e8%af%8d)
+  - [排序](#%e6%8e%92%e5%ba%8f)
+  - [分数算法](#%e5%88%86%e6%95%b0%e7%ae%97%e6%b3%95)
+
 # 基本概念
 
 * 文档（document）: 最小数据单元，可以是一条用户数据，通常用json数据结构表示
@@ -37,7 +66,7 @@ GET /{index-name}/_mapping // 获取index的mapping类型
 ```
 PUT /{index-name}/_doc/1 //创建
 {
-    "user" : "kimchy",
+    "user" : "kim",
     "post_date" : "2009-11-15T14:12:12",
     "message" : "trying out Elasticsearch"
 }
@@ -46,7 +75,7 @@ GET /{index-name}/{id} // 查询
 
 PUT /{index-name}/_doc/{id} // 更新
 {
-    "user" : "kimchy"
+    "user" : "kim"
 }
 
 DELETE /{index-name}/{id} // 删除
@@ -113,6 +142,9 @@ GET /_search/scroll
     "scroll": 1m,
     "scroll_id": 123132
 }
+
+// 分析当前搜索
+PUT /{index-name}/_analyze
 ```
 
 # 分布式架构
@@ -172,12 +204,17 @@ GET /_search/scroll
 3. 实际执行node返回结果给coordinating node
 4. coordinating node将结果返回给客户端
 
+## 写入更新索引内部逻辑（todo）
+
 # 搜索
 
 ## 倒排索引
 
 * 正排索引：文档id到单词的关联关系
 * 倒排索引：单词到文档id的关联关系；一般由单词词典和倒排表组成
+* es倒排索引是不可变的
+  * 好处是：不需加锁，可以一直放在缓存中，也可以整块压缩节约io和cpu
+  * 坏处是：修改需要重新构建索引
 
 ## 分词器
 
@@ -186,6 +223,11 @@ GET /_search/scroll
 3. token filter：大小写，去停，同义词；
 
 ## mapping
+
+* 设置dynamic策略
+  * true：遇到陌生字段，自动进行dynamic mapping
+  * false：遇到陌生字段，忽略
+  * strict：遇到陌生字段，报错
 
 ## 搜索模式
 

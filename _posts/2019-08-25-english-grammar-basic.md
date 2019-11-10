@@ -4,6 +4,37 @@ date:   2019-08-25 12:00:00 +0800
 categories: [English]
 ---
 
+- [句子结构分类](#%e5%8f%a5%e5%ad%90%e7%bb%93%e6%9e%84%e5%88%86%e7%b1%bb)
+- [简单句六个基本句型](#%e7%ae%80%e5%8d%95%e5%8f%a5%e5%85%ad%e4%b8%aa%e5%9f%ba%e6%9c%ac%e5%8f%a5%e5%9e%8b)
+  - [简单句的分类，由谓语动词决定](#%e7%ae%80%e5%8d%95%e5%8f%a5%e7%9a%84%e5%88%86%e7%b1%bb%e7%94%b1%e8%b0%93%e8%af%ad%e5%8a%a8%e8%af%8d%e5%86%b3%e5%ae%9a)
+    - [有实意动词：](#%e6%9c%89%e5%ae%9e%e6%84%8f%e5%8a%a8%e8%af%8d)
+    - [无实意动词](#%e6%97%a0%e5%ae%9e%e6%84%8f%e5%8a%a8%e8%af%8d)
+  - [简单句的核心变化（动词变化）](#%e7%ae%80%e5%8d%95%e5%8f%a5%e7%9a%84%e6%a0%b8%e5%bf%83%e5%8f%98%e5%8c%96%e5%8a%a8%e8%af%8d%e5%8f%98%e5%8c%96)
+    - [时态](#%e6%97%b6%e6%80%81)
+      - [一般过去](#%e4%b8%80%e8%88%ac%e8%bf%87%e5%8e%bb)
+      - [一般现在时](#%e4%b8%80%e8%88%ac%e7%8e%b0%e5%9c%a8%e6%97%b6)
+      - [一般将来时](#%e4%b8%80%e8%88%ac%e5%b0%86%e6%9d%a5%e6%97%b6)
+      - [一般过去将来时](#%e4%b8%80%e8%88%ac%e8%bf%87%e5%8e%bb%e5%b0%86%e6%9d%a5%e6%97%b6)
+      - [进行时](#%e8%bf%9b%e8%a1%8c%e6%97%b6)
+      - [现在完成时](#%e7%8e%b0%e5%9c%a8%e5%ae%8c%e6%88%90%e6%97%b6)
+      - [过去完成时](#%e8%bf%87%e5%8e%bb%e5%ae%8c%e6%88%90%e6%97%b6)
+      - [完成进行时](#%e5%ae%8c%e6%88%90%e8%bf%9b%e8%a1%8c%e6%97%b6)
+    - [语态](#%e8%af%ad%e6%80%81)
+      - [被动语态](#%e8%a2%ab%e5%8a%a8%e8%af%ad%e6%80%81)
+- [从句](#%e4%bb%8e%e5%8f%a5)
+  - [名词性从句](#%e5%90%8d%e8%af%8d%e6%80%a7%e4%bb%8e%e5%8f%a5)
+  - [定语从句](#%e5%ae%9a%e8%af%ad%e4%bb%8e%e5%8f%a5)
+  - [状语从句](#%e7%8a%b6%e8%af%ad%e4%bb%8e%e5%8f%a5)
+- [特殊句式](#%e7%89%b9%e6%ae%8a%e5%8f%a5%e5%bc%8f)
+  - [强调句](#%e5%bc%ba%e8%b0%83%e5%8f%a5)
+  - [倒装句](#%e5%80%92%e8%a3%85%e5%8f%a5)
+  - [虚拟语气](#%e8%99%9a%e6%8b%9f%e8%af%ad%e6%b0%94)
+    - [条件状语从句](#%e6%9d%a1%e4%bb%b6%e7%8a%b6%e8%af%ad%e4%bb%8e%e5%8f%a5)
+    - [虚拟语气](#%e8%99%9a%e6%8b%9f%e8%af%ad%e6%b0%94-1)
+- [时态](#%e6%97%b6%e6%80%81-1)
+- [语态](#%e8%af%ad%e6%80%81-1)
+- [非谓语](#%e9%9d%9e%e8%b0%93%e8%af%ad)
+
 # 句子结构分类
 
 * 简单句：主语 + 谓语 + 宾语
@@ -25,6 +56,162 @@ categories: [English]
   * 表示存在
 
 <!--more-->
+
+## 简单句的分类，由谓语动词决定
+
+### 有实意动词：
+1. 不及物动词（可以主语独立完成） --> 主谓
+2. 及物动词 --> 主谓**宾**；主谓**双宾**（人+物）；主谓宾**补**
+
+区分及物和不及物动词：
+1. 意思，看中文意思是否可以主语单独完成，不需要补充
+2. 介词，如果动词后面跟介词，为不及物动词
+
+ie.
+```
+I look at you.
+> 加了介宾，表明原来的动词是不及物动词
+
+双宾语，人+物直接写，物+人需要加 for（表目的） 或者 to（表方向）
+I bought you a present. --> I bought a present for you.
+> 双宾语，表示目的使用for
+
+They offered me a vacant post. --> They offered a vacant post to me.
+> 双宾语，表示方向使用to
+
+I find HongKong a good place for shopping.
+I find HongKong very beautiful.
+> 主谓宾补
+```
+
+### 无实意动词
+1. 连词（系动词） --> 主系表
+
+* be动词（单独）
+* 变得：get, become, turn, go, grow
+* 感官动词：look, sound, smell, taste, fell
+* 保持：keep, remain
+* 似乎：seem, appear
+  
+ie.
+```
+I am very happy
+```
+
+## 简单句的核心变化（动词变化）
+
+动词的时态（时间&状态）；语态；情态；否定变化
+
+| 时 态    | 过去           | 现在                | 将来                       | 过去将来                       |
+| -------- | -------------- | ------------------- | -------------------------- | ------------------------------ |
+| 一般     | did            | do                  | will do/ be going to       | would do/ was/were going to do |
+| 进行     | was/were doing | am/is/are doing     | will/shall be doing        | 不常用                         |
+| 完成     | had done       | have/has done       | will/shall have done       | 不常用                         |
+| 完成进行 | had been doing | have/has been doing | will/shall have been doing | 不常用                         |
+
+### 时态
+#### 一般过去
+* 形式：v.过去式 did/was/were
+* 用法：表示过去的事情，与现在无关
+
+| He was happy.     | He liked English.        |
+| ----------------- | ------------------------ |
+| He was not happy. | He did not like English. |
+| Was he happy?     | Did he like English?     |
+| How was he?       | What did he like?        |
+
+**过去式**和**过去分词**:
+过去式用在一般过去式；过去分词用于完成时，被动语态，不做谓语
+
+#### 一般现在时
+* 形式：v.原型 do v.第三人称单数 does
+  * 第三人称单数he, she, it,可数名词的单数
+* 用法：
+  * 表示现在经常性习惯性的动作 --> He often gets up late
+  * 现在的状态 --> I am a good coder
+  * 永恒（客观事实，科学真理，名言） --> The earth moves around the sun. Practice makes prefect.
+
+| He is happy.     | You like English.       |
+| ---------------- | ----------------------- |
+| He is not happy. | You don't like English. |
+| Is he happy?     | Do you like English?    |
+| How is he?       | What do you like?       |
+
+* 常用搭配 - 与频率连用
+  * every
+  * once a week
+  * three times a ...
+  * always (7 days a week)
+  * usually, often, frequently (5,6 days a week)
+  * sometimes, occasionally (4,3 days a week)
+  * seldom, hardly (1,2 days a week)
+  * never (0)
+
+#### 一般将来时
+* 形式：
+  * will + v. （临时）
+  * be(am/is/are) going to + v. （经过事先计划好的）
+* 用法：（现在的）将来的事
+  
+| He will leave.   | He is going to leave.    |
+| ---------------- | ------------------------ |
+| He won't leave   | He is not going to leave |
+| Will he leave?   | Is he going to leave?    |
+| What will he do? | What is he going to do?  |
+
+#### 一般过去将来时
+* 形式
+  * would
+  * was/were goint to
+* 用法：过去的将来，常常和过去时连用
+
+> ie. I said that I would become a cooker in the future.
+>
+> ie. Tommy finished his work, and then he would leave for London.
+
+#### 进行时
+* 形式：
+  * was/were doing (过去)
+  * am/is/are doing （现在）
+  * will/shall be doing （将来）
+* 用法：强调正在进行
+
+> ie. At 10 o'clock yesterday some student were taking aan exam in their classroom.
+>
+> ie. We are taking about the water pollution.
+>
+> ie. A great many candidates will be meeting here at this time tomorrow. 
+
+#### 现在完成时
+* 形式：have/has + done(过去分词)
+* 用法：（现在看之前）
+  * 现在全部完成
+  * 现在部分完成
+  
+#### 过去完成时
+* 形式：had done
+* 用法：过去的之前
+
+> ie. When he got there, she had left.
+
+#### 完成进行时
+* 形式：have been doing
+* 用法：强调过程
+
+> We have not won the match. --> 现在完成，强调结果
+> 
+> We have been working hard the several months. --> 现在完成进行，强调过程
+
+### 语态
+语态分为两种：主动，**被动**（客观为主体）
+
+#### 被动语态
+* 适用范围：
+  * **及物动词**（提前宾语，变成主语，形成被动语态）
+  * 不及物动词（不及物动词 + 介宾，提前宾语，形成被动语态）
+* 形式：be(被动的时间，变成对应的时态；主语的单复数) + done(被动的动作)
+
+> ie. Classrooms are cleaned every day.
 
 # 从句
 
