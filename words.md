@@ -175,3 +175,9 @@ Some of conceptual wrapping paper worked exceptionally well, being both descript
 * steady income
 * lexical concept
 * I impress him as a scholar.
+
+# 2019/11/16
+
+## A Byte way of Python
+
+All the white space i.e. spaces and tabs, within the quotes, are prevented as-is.

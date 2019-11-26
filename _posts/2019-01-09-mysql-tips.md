@@ -4,6 +4,7 @@ date:   2019-01-09 15:00:00 +0800
 categories: [database]
 ---
 # 测试数据库
+
 https://github.com/datacharmer/test_db
 
 # select for update 锁表情况
@@ -58,3 +59,7 @@ INNER JOIN (SELECT id FROM salaries WHERE salary <= 94000 LIMIT 2677500,10) AS l
 4. 优化器（优化查询语句，制定执行计划）
 5. 执行器（操作引擎，返回结果）
 6. 存储器（存储数据，提供读写接口）
+
+# 索引
+
+1. 索引列的长度不宜过长，因为太差会导致一个页中存放的key数目变少，间接导致索引树的页数变多，索引层次增加，从而影响查询效率。
