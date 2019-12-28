@@ -181,3 +181,9 @@ Some of conceptual wrapping paper worked exceptionally well, being both descript
 ## A Byte way of Python
 
 All the white space i.e. spaces and tabs, within the quotes, are prevented as-is.
+
+# 2019/12/25
+
+## 墨墨单词
+
+1. The worries prey on his mind.

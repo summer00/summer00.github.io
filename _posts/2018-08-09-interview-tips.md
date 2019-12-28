@@ -63,6 +63,8 @@ categories: [summary]
   - [TCP](#tcp)
 - [多线程](#%e5%a4%9a%e7%ba%bf%e7%a8%8b)
   - [`wait()`和`sleep`的区别](#wait%e5%92%8csleep%e7%9a%84%e5%8c%ba%e5%88%ab)
+- [项目](#%e9%a1%b9%e7%9b%ae)
+  - [如何确保项目的质量](#%e5%a6%82%e4%bd%95%e7%a1%ae%e4%bf%9d%e9%a1%b9%e7%9b%ae%e7%9a%84%e8%b4%a8%e9%87%8f)
 
 # JVM
 
@@ -381,3 +383,11 @@ note
 2. `wait()`需要在同步代码块中调用，因为要获取监视器，否则会抛出`IllegalMonitorStateException`异常
 3. `wait()`是`Object`的方法，`sleep`是`Thread`的静态方法
 4. `wait()`需要被唤醒，`sleep()`不需要
+
+# 项目
+
+## 如何确保项目的质量
+
+1. 开发阶段：单元测试，code review，静态代码扫描（sonar）
+2. 测试阶段：功能测试，非功能测试，兼容性测试，压力测试
+3. 部署上线阶段：预上线，回滚方案，线上监控
