@@ -7,7 +7,7 @@ categories: [English]
 - [句子结构分类](#%e5%8f%a5%e5%ad%90%e7%bb%93%e6%9e%84%e5%88%86%e7%b1%bb)
 - [简单句六个基本句型](#%e7%ae%80%e5%8d%95%e5%8f%a5%e5%85%ad%e4%b8%aa%e5%9f%ba%e6%9c%ac%e5%8f%a5%e5%9e%8b)
   - [简单句的分类，由谓语动词决定](#%e7%ae%80%e5%8d%95%e5%8f%a5%e7%9a%84%e5%88%86%e7%b1%bb%e7%94%b1%e8%b0%93%e8%af%ad%e5%8a%a8%e8%af%8d%e5%86%b3%e5%ae%9a)
-    - [有实意动词：](#%e6%9c%89%e5%ae%9e%e6%84%8f%e5%8a%a8%e8%af%8d)
+    - [有实意动词](#%e6%9c%89%e5%ae%9e%e6%84%8f%e5%8a%a8%e8%af%8d)
     - [无实意动词](#%e6%97%a0%e5%ae%9e%e6%84%8f%e5%8a%a8%e8%af%8d)
   - [简单句的核心变化（动词变化）](#%e7%ae%80%e5%8d%95%e5%8f%a5%e7%9a%84%e6%a0%b8%e5%bf%83%e5%8f%98%e5%8c%96%e5%8a%a8%e8%af%8d%e5%8f%98%e5%8c%96)
     - [时态](#%e6%97%b6%e6%80%81)
@@ -21,7 +21,14 @@ categories: [English]
       - [完成进行时](#%e5%ae%8c%e6%88%90%e8%bf%9b%e8%a1%8c%e6%97%b6)
     - [语态](#%e8%af%ad%e6%80%81)
       - [被动语态](#%e8%a2%ab%e5%8a%a8%e8%af%ad%e6%80%81)
-- [从句](#%e4%bb%8e%e5%8f%a5)
+    - [情态](#%e6%83%85%e6%80%81)
+  - [简单词主语/宾语/表语变化](#%e7%ae%80%e5%8d%95%e8%af%8d%e4%b8%bb%e8%af%ad%e5%ae%be%e8%af%ad%e8%a1%a8%e8%af%ad%e5%8f%98%e5%8c%96)
+  - [介词](#%e4%bb%8b%e8%af%8d)
+  - [非谓语](#%e9%9d%9e%e8%b0%93%e8%af%ad)
+  - [同位语](#%e5%90%8c%e4%bd%8d%e8%af%ad)
+  - [插入语](#%e6%8f%92%e5%85%a5%e8%af%ad)
+- [并列句](#%e5%b9%b6%e5%88%97%e5%8f%a5)
+- [复合句](#%e5%a4%8d%e5%90%88%e5%8f%a5)
   - [名词性从句](#%e5%90%8d%e8%af%8d%e6%80%a7%e4%bb%8e%e5%8f%a5)
   - [定语从句](#%e5%ae%9a%e8%af%ad%e4%bb%8e%e5%8f%a5)
   - [状语从句](#%e7%8a%b6%e8%af%ad%e4%bb%8e%e5%8f%a5)
@@ -33,7 +40,7 @@ categories: [English]
     - [虚拟语气](#%e8%99%9a%e6%8b%9f%e8%af%ad%e6%b0%94-1)
 - [时态](#%e6%97%b6%e6%80%81-1)
 - [语态](#%e8%af%ad%e6%80%81-1)
-- [非谓语](#%e9%9d%9e%e8%b0%93%e8%af%ad)
+- [非谓语](#%e9%9d%9e%e8%b0%93%e8%af%ad-1)
 
 # 句子结构分类
 
@@ -59,7 +66,7 @@ categories: [English]
 
 ## 简单句的分类，由谓语动词决定
 
-### 有实意动词：
+### 有实意动词
 1. 不及物动词（可以主语独立完成） --> 主谓
 2. 及物动词 --> 主谓**宾**；主谓**双宾**（人+物）；主谓宾**补**
 
@@ -210,20 +217,109 @@ I am very happy
   * **及物动词**（提前宾语，变成主语，形成被动语态）
   * 不及物动词（不及物动词 + 介宾，提前宾语，形成被动语态）
 * 形式：be(被动的时间，变成对应的时态；主语的单复数) + done(被动的动作)
+* 时态：改变be的时态
 
-> ie. Classrooms are cleaned every day.
+| 时态     | 动词                   | 例子                        |
+| -------- | ---------------------- | --------------------------- |
+| 一般     | am/is/are + done       | He is beaten every day.     |
+| 过去     | was/were + done        | He was beaten yesterday.    |
+| 将来     | will be + done         | He will be beaten tomorrow. |
+| 正在进行 | am/is/are being + done | He is being beaten.         |
+| 现在完成 | have/has been + done   | He has been beaten.         |
 
-# 从句
+### 情态
+
+表达情绪态度
+
+* 形式：情态动词（无人称变化，时态变化有限（一般，过去）） + 动词原型
+* 时态有限，只有两种一般时、过去时。使用过去时不总表示过去，也可以使语气更客气
+
+| 现在时 | 过去时 | 表示情绪态度 | 表示推断   |
+| ------ | ------ | ------------ | ---------- |
+| must   | -      | 必须，语气强 | 可能性最大 |
+| can    | could  | 能够，可以   |            |
+| will   | would  | 愿意，将要   | 有可能     |
+| shall  | should | 应该         | 有可能     |
+| may    | might  | 可以，可能   | 有可能     |
+
+## 简单词主语/宾语/表语变化
+
+1. 动名词和不定式（doing/to do）可以做名词使用，在句子里担任主语/宾语/表语
+
+> ie. It's good for your heath to laugh.<br>
+> We enjoy reading books in the library.<br>
+> Our main goal is to finish this job on time.
+
+2. 简单句子也可以有多个并列的主语、宾语、表语
+
+## 介词
+
+介词后面接三种：名词、代词、动名词， 一起构成介词短语
+
+| 介词      | 意思                                 |
+| --------- | ------------------------------------ |
+| in        | 在里面                               |
+| on        | 在上面                               |
+| at        | 在点                                 |
+| from...to | 从...到...                           |
+| into      | 朝里面进去                           |
+| onto      | 朝上面去                             |
+| with      | 伴随着有                             |
+| without   | 伴随着没有                           |
+| of        | 的                                   |
+| by        | 通过...方式；被； 在旁边；截至；差额 |
+| for       | 跟时间表示，持续时间；为了           |
+| about     | 关于                                 |
+| between   | 两者之间                             |
+| among     | 多人之间                             |
+| across    | 平面穿过                             |
+| through   | 里面穿过                             |
+
+## 非谓语
+
+判断非谓语表示主动被动，看其修饰什么（名词或句子），根据他们的关系选择表示方式。
+| 形式  | 表示 | 例子                                       |
+| ----- | ---- | ------------------------------------------ |
+| doing | 主动 | Passing planes can be heard night and day. |
+| done  | 被动 | He bought a used car.                      |
+| to do | 目的 | I am coming to see you.                    |
+
+## 同位语
+
+和前面的名词是表示相同的意思的为同位语，是对名词的补充说明
+> My teacher, Mr.Lee, is coming to the meeting.
+
+## 插入语
+
+解释说明前面的名词，和前后句子都关系不大
+> My teacher, together with his colleagues, is coming to the meeting.
+
+# 并列句
+
+连接简单句，需要加上合适的连接词。当多个句子的重要性差不多时，可以写成并列句。并列句子中相同的部分可以省略，余下的可以保持不变。
+
+| 表示 | 词                                                                       |
+| ---- | ------------------------------------------------------------------------ |
+| 顺接 | ..and..; both..and..; not only..but..as well; not only..but also..       |
+| 转折 | ..but..; ..yet..; ..while..                                              |
+| 选择 | ..or..; either..or..; neither..nor..（后面的谓语使用就近原则选择其形式） |
+| 因果 | ..for..; ..so..;                                                         |
+
+# 复合句
 
 ## 名词性从句
 
 根据从句所在的位置，可分为：
-* 主语从句
-* 宾语从句
-* 表语从句
-* 同位语从句（引导词只有that)
+* 主语从句（用作主语，可放句首，也可it开头后放句尾，表示是否时只能用whether）
+* 宾语从句（动宾，动双宾，介宾）
+* 表语从句（系动词后面）
+* 同位语从句（在抽象名词后，用于解释说明，引导词常用that)
 
-名词性从句的常见的引导词：that, weather, what
+名词性从句写法相同，位置不同，其常见的引导词：that, weather, what
+
+> ie. 陈述句变宾语从句：I know that you are right.<br>
+> 疑问句变宾语从句：I know what she will say.<br>
+> 一般疑问句变宾语从句：I know whether/if he is happy.
 
 ## 定语从句
 
