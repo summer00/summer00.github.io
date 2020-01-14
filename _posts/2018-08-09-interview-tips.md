@@ -44,8 +44,8 @@ categories: [summary]
     - [聚集索引](#%e8%81%9a%e9%9b%86%e7%b4%a2%e5%bc%95)
   - [执行过程](#%e6%89%a7%e8%a1%8c%e8%bf%87%e7%a8%8b)
 - [Tips](#tips)
-  - [`Error`和`Exception`](#error%e5%92%8cexception)
-  - [覆盖`equals()`](#%e8%a6%86%e7%9b%96equals)
+  - [Error和Exception](#error%e5%92%8cexception)
+  - [覆盖equals()](#%e8%a6%86%e7%9b%96equals)
   - [重写（overloading）与重载（overwrite）](#%e9%87%8d%e5%86%99overloading%e4%b8%8e%e9%87%8d%e8%bd%bdoverwrite)
   - [final, finally, finalize](#final-finally-finalize)
   - [Object类方法](#object%e7%b1%bb%e6%96%b9%e6%b3%95)
@@ -62,7 +62,7 @@ categories: [summary]
 - [网络协议](#%e7%bd%91%e7%bb%9c%e5%8d%8f%e8%ae%ae)
   - [TCP](#tcp)
 - [多线程](#%e5%a4%9a%e7%ba%bf%e7%a8%8b)
-  - [`wait()`和`sleep`的区别](#wait%e5%92%8csleep%e7%9a%84%e5%8c%ba%e5%88%ab)
+  - [wait()和sleep的区别](#wait%e5%92%8csleep%e7%9a%84%e5%8c%ba%e5%88%ab)
 - [项目](#%e9%a1%b9%e7%9b%ae)
   - [如何确保项目的质量](#%e5%a6%82%e4%bd%95%e7%a1%ae%e4%bf%9d%e9%a1%b9%e7%9b%ae%e7%9a%84%e8%b4%a8%e9%87%8f)
 
@@ -390,4 +390,4 @@ note
 
 1. 开发阶段：单元测试，code review，静态代码扫描（sonar）
 2. 测试阶段：功能测试，非功能测试，兼容性测试，压力测试
-3. 部署上线阶段：预上线，回滚方案，线上监控
+3. 部署上线阶段：预上线，回滚方案，线上监控-
