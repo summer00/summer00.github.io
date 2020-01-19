@@ -43,9 +43,16 @@ categories: [summary]
     - [类型](#%e7%b1%bb%e5%9e%8b)
     - [聚集索引](#%e8%81%9a%e9%9b%86%e7%b4%a2%e5%bc%95)
   - [执行过程](#%e6%89%a7%e8%a1%8c%e8%bf%87%e7%a8%8b)
+- [ElasticSearch](#elasticsearch)
+  - [设计优点：](#%e8%ae%be%e8%ae%a1%e4%bc%98%e7%82%b9)
+- [Kafka](#kafka)
+  - [设计优点：](#%e8%ae%be%e8%ae%a1%e4%bc%98%e7%82%b9-1)
+- [Redis](#redis)
+  - [Redis为什么是单线程，如何利用多核 cpu 机器](#redis%e4%b8%ba%e4%bb%80%e4%b9%88%e6%98%af%e5%8d%95%e7%ba%bf%e7%a8%8b%e5%a6%82%e4%bd%95%e5%88%a9%e7%94%a8%e5%a4%9a%e6%a0%b8-cpu-%e6%9c%ba%e5%99%a8)
+  - [如何用 zk 实现分布式锁，与 redis 分布式锁有和优缺点](#%e5%a6%82%e4%bd%95%e7%94%a8-zk-%e5%ae%9e%e7%8e%b0%e5%88%86%e5%b8%83%e5%bc%8f%e9%94%81%e4%b8%8e-redis-%e5%88%86%e5%b8%83%e5%bc%8f%e9%94%81%e6%9c%89%e5%92%8c%e4%bc%98%e7%bc%ba%e7%82%b9)
 - [Tips](#tips)
-  - [Error和Exception](#error%e5%92%8cexception)
-  - [覆盖equals()](#%e8%a6%86%e7%9b%96equals)
+  - [`Error`和`Exception`](#error%e5%92%8cexception)
+  - [覆盖`equals()`](#%e8%a6%86%e7%9b%96equals)
   - [重写（overloading）与重载（overwrite）](#%e9%87%8d%e5%86%99overloading%e4%b8%8e%e9%87%8d%e8%bd%bdoverwrite)
   - [final, finally, finalize](#final-finally-finalize)
   - [Object类方法](#object%e7%b1%bb%e6%96%b9%e6%b3%95)
@@ -62,7 +69,7 @@ categories: [summary]
 - [网络协议](#%e7%bd%91%e7%bb%9c%e5%8d%8f%e8%ae%ae)
   - [TCP](#tcp)
 - [多线程](#%e5%a4%9a%e7%ba%bf%e7%a8%8b)
-  - [wait()和sleep的区别](#wait%e5%92%8csleep%e7%9a%84%e5%8c%ba%e5%88%ab)
+  - [`wait()`和`sleep`的区别](#wait%e5%92%8csleep%e7%9a%84%e5%8c%ba%e5%88%ab)
 - [项目](#%e9%a1%b9%e7%9b%ae)
   - [如何确保项目的质量](#%e5%a6%82%e4%bd%95%e7%a1%ae%e4%bf%9d%e9%a1%b9%e7%9b%ae%e7%9a%84%e8%b4%a8%e9%87%8f)
 
@@ -272,6 +279,44 @@ Inno DB的聚集索引规则：
 4. 优化器（优化查询语句，制定执行计划）
 5. 执行器（操作引擎，返回结果）
 6. 存储器（存储数据，提供读写接口）
+
+# ElasticSearch
+
+## 设计优点：
+1. API设计的好，简洁易用
+2. 分布式存储，每个索引可以设置分区和备份，防止数据的丢失
+3. 写操作会被转发到主分区，但备份可以进行读操作的计算，增加效率
+4. 一个搜索会在多台机器上分布式的进行，提升搜索效率
+5. 删除和更新，都是先标记为逻辑删除，再新增数据接在后面，可以保证一定的顺序存储，提升读取效率
+6. ES的倒排索引是不可变得
+   - 好处是：不需加锁，可以一直放在缓存中，也可以整块压缩节约io和cpu
+   - 坏处是：修改需要重新构建索引
+
+# Kafka
+
+## 设计优点：
+1. Kafka使用硬盘存储，但做了很多优化的设计使存储性能很高
+   1. 顺序存储，所有的消息在文件后面追加
+   2. 通过维护一个offset来实现顺序访问
+2. IO采用0拷贝技术，减少了从内核空间读取到用户缓存，再从用户缓存输出到网络流的时间。直接从页缓存写入网络流
+3. 网络带宽上的设计考虑，会对消息做压缩，减少带宽消耗。也可以设置消息批量发送，减少网络请求次数
+4. 分布式存储设计，有备份和主分区，保证消息不丢失。用户通过offset也能从宕机事故中快速恢复
+
+# Redis
+
+## Redis为什么是单线程，如何利用多核 cpu 机器
+
+因为CPU不是Redis的瓶颈。Redis的瓶颈最有可能是机器内存或者网络带宽。而且Redis操作内存中的数据，采用多线程可能有加锁解锁的性能消耗。既然单线程容易实现，而且CPU不会成为瓶颈，那就顺理成章地采用单线程的方案了。
+
+如果万一CPU成为你的Redis瓶颈了，或者，你就是不想让服务器其他核闲置，那怎么办？
+
+那也很简单，你多起几个Redis进程就好了。Redis是keyvalue数据库，又不是关系数据库，数据之间没有约束。只要客户端分清哪些key放在哪个Redis进程上就可以了。redis-cluster可以帮你做的更好。
+
+## 如何用 zk 实现分布式锁，与 redis 分布式锁有和优缺点
+
+Redis设置值和超时时间，设置成功表示加锁成功
+
+Zookeeper创建临时节点，创建成功就代表加锁成功；失败的监听这个节点，当节点删除后，再次尝试
 
 # Tips
 
