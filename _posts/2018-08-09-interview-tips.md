@@ -16,8 +16,9 @@ categories: [summary]
     - [方法](#%e6%96%b9%e6%b3%95)
   - [类的生命周期](#%e7%b1%bb%e7%9a%84%e7%94%9f%e5%91%bd%e5%91%a8%e6%9c%9f)
   - [synchronized 原理](#synchronized-%e5%8e%9f%e7%90%86)
-  - [常用参数](#%e5%b8%b8%e7%94%a8%e5%8f%82%e6%95%b0)
   - [内存溢出问题排查](#%e5%86%85%e5%ad%98%e6%ba%a2%e5%87%ba%e9%97%ae%e9%a2%98%e6%8e%92%e6%9f%a5)
+  - [Jvm 监控工具](#jvm-%e7%9b%91%e6%8e%a7%e5%b7%a5%e5%85%b7)
+  - [常用参数](#%e5%b8%b8%e7%94%a8%e5%8f%82%e6%95%b0)
 - [JDK 源码](#jdk-%e6%ba%90%e7%a0%81)
   - [JDK 线程池实现](#jdk-%e7%ba%bf%e7%a8%8b%e6%b1%a0%e5%ae%9e%e7%8e%b0)
   - [CurrentHashMap 实现](#currenthashmap-%e5%ae%9e%e7%8e%b0)
@@ -31,7 +32,7 @@ categories: [summary]
   - [jdk8 ～ 11 升级](#jdk8--11-%e5%8d%87%e7%ba%a7)
   - [创建多少线程才是合适的](#%e5%88%9b%e5%bb%ba%e5%a4%9a%e5%b0%91%e7%ba%bf%e7%a8%8b%e6%89%8d%e6%98%af%e5%90%88%e9%80%82%e7%9a%84)
   - [String s = new String("abc") 产生了几个对象？分别放在哪里？JDK1.8 前后存放的区域有什么不同？](#string-s--new-string%22abc%22-%e4%ba%a7%e7%94%9f%e4%ba%86%e5%87%a0%e4%b8%aa%e5%af%b9%e8%b1%a1%e5%88%86%e5%88%ab%e6%94%be%e5%9c%a8%e5%93%aa%e9%87%8cjdk18-%e5%89%8d%e5%90%8e%e5%ad%98%e6%94%be%e7%9a%84%e5%8c%ba%e5%9f%9f%e6%9c%89%e4%bb%80%e4%b9%88%e4%b8%8d%e5%90%8c)
-  - [ThreadPoolExecutor的工作流程](#threadpoolexecutor%e7%9a%84%e5%b7%a5%e4%bd%9c%e6%b5%81%e7%a8%8b)
+  - [ThreadPoolExecutor 的工作流程](#threadpoolexecutor-%e7%9a%84%e5%b7%a5%e4%bd%9c%e6%b5%81%e7%a8%8b)
 - [Spring](#spring)
   - [Spring IOC](#spring-ioc)
   - [流程](#%e6%b5%81%e7%a8%8b)
@@ -40,6 +41,8 @@ categories: [summary]
   - [bean 生命周期](#bean-%e7%94%9f%e5%91%bd%e5%91%a8%e6%9c%9f)
   - [FactoryBean](#factorybean)
   - [Spring AOP](#spring-aop)
+    - [spring事务传播机制如何实现的](#spring%e4%ba%8b%e5%8a%a1%e4%bc%a0%e6%92%ad%e6%9c%ba%e5%88%b6%e5%a6%82%e4%bd%95%e5%ae%9e%e7%8e%b0%e7%9a%84)
+    - [spring aop使用注意点是什么](#spring-aop%e4%bd%bf%e7%94%a8%e6%b3%a8%e6%84%8f%e7%82%b9%e6%98%af%e4%bb%80%e4%b9%88)
   - [Spring Bean 创建过程](#spring-bean-%e5%88%9b%e5%bb%ba%e8%bf%87%e7%a8%8b)
 - [分布式缓存设计](#%e5%88%86%e5%b8%83%e5%bc%8f%e7%bc%93%e5%ad%98%e8%ae%be%e8%ae%a1)
   - [问题与解决](#%e9%97%ae%e9%a2%98%e4%b8%8e%e8%a7%a3%e5%86%b3)
@@ -148,6 +151,18 @@ categories: [summary]
 - 三种使用方式：1）修饰方法，锁定当前对象 2）修饰静态方法，锁定的当前类的 Class 实例 3）修饰代码块，锁定指定的对象
 - synchronized 用的锁是存在 Java 对象头里的。JVM 基于进入和退出 Monitor 对象来实现方法同步和代码块同步。代码块同步是使用 monitorenter 和 monitorexit 指令实现的，monitorenter 指令是在编译后插入到同步代码块的开始位置，而 monitorexit 是插入到方法结束处和异常处。任何对象都有一个 monitor 与之关联，当且一个 monitor 被持有后，它将处于锁定状态。根据虚拟机规范的要求，在执行 monitorenter 指令时，首先要去尝试获取对象的锁，如果这个对象没被锁定，或者当前线程已经拥有了那个对象的锁，把锁的计数器加 1；相应地，在执行 monitorexit 指令时会将锁计数器减 1，当计数器被减到 0 时，锁就释放了。如果获取对象锁失败了，那当前线程就要阻塞等待，直到对象锁被另一个线程释放为止。
 
+## 内存溢出问题排查
+
+1. 配置 jvm 参数，生成内存溢出是的堆存储快照，`-XX:+HeapDumOnOutOfMemoryError`
+2. 使用 Memory Analyzer 查看 dump 出的文件
+
+## Jvm 监控工具
+
+| 工具     | 作用                       |
+| -------- | -------------------------- |
+| jconsole | 监控当前执行中的 java 进程 |
+| jps：    | 查看所有的 java 进程       |
+
 ## 常用参数
 
 | 参数                     | 描述                                                                                         |
@@ -157,11 +172,6 @@ categories: [summary]
 | -Xmn                     | 设置年轻代对空间的初始值，最小值和最大值。请注意，年老代堆空间大小是依赖于年轻代堆空间大小的 |
 | -XX:PermSize=n [g/m/k]   | 设置持久代堆空间的初始值和最小值                                                             |
 | -XX:MaxPermSize=n[g/m/k] | 设置持久代堆空间的最大值                                                                     |
-
-## 内存溢出问题排查
-
-1. 配置jvm参数，生成内存溢出是的堆存储快照，`-XX:+HeapDumOnOutOfMemoryError`
-2. 使用
 
 # JDK 源码
 
@@ -224,17 +234,17 @@ JDK1.8 后，字符串常量池从永久代移动到了堆中。为什么呢？
 1. 字符串在永久代中，容易出现性能问题和内存溢出
 2. 永久代会为 GC 带来不必要的复杂度，并且回收效率偏低
 
-## ThreadPoolExecutor的工作流程
+## ThreadPoolExecutor 的工作流程
 
-1. 每次提交任务时，如果线程数还没达到coreSize就创建新线程并绑定该任务。所以第coreSize次提交任务后线程总数必达到coreSize，不会重用之前的空闲线程。在生产环境，为了避免首次调用超时，可以调用executor.prestartCoreThread()预创建所有core线程，避免来一个创一个带来首次调用慢的问题。
+1. 每次提交任务时，如果线程数还没达到 coreSize 就创建新线程并绑定该任务。所以第 coreSize 次提交任务后线程总数必达到 coreSize，不会重用之前的空闲线程。在生产环境，为了避免首次调用超时，可以调用 executor.prestartCoreThread()预创建所有 core 线程，避免来一个创一个带来首次调用慢的问题。
 
-2. 线程数达到coreSize后，新增的任务就放到工作队列里，而线程池里的线程则努力的使用take()阻塞地从工作队列里拉活来干。
+2. 线程数达到 coreSize 后，新增的任务就放到工作队列里，而线程池里的线程则努力的使用 take()阻塞地从工作队列里拉活来干。
 
 3. 如果队列是个有界队列，又如果线程池里的线程不能及时将任务取走，工作队列可能会满掉，插入任务就会失败，此时线程池就会紧急的再创建新的临时线程来补救。
 
-4. 临时线程使用poll(keepAliveTime，timeUnit)来从工作队列拉活，如果时候到了仍然两手空空没拉到活，表明它太闲了，就会被解雇掉。
+4. 临时线程使用 poll(keepAliveTime，timeUnit)来从工作队列拉活，如果时候到了仍然两手空空没拉到活，表明它太闲了，就会被解雇掉。
 
-5. 如果core线程数＋临时线程数 >maxSize，则不能再创建新的临时线程了，转头执行RejectExecutionHanlder。默认的AbortPolicy抛RejectedExecutionException异常，其他选择包括静默放弃当前任务(Discard)，放弃工作队列里最老的任务(DisacardOldest)，或由主线程来直接执行(CallerRuns)，或你自己发挥想象力写的一个。
+5. 如果 core 线程数＋临时线程数 >maxSize，则不能再创建新的临时线程了，转头执行 RejectExecutionHanlder。默认的 AbortPolicy 抛 RejectedExecutionException 异常，其他选择包括静默放弃当前任务(Discard)，放弃工作队列里最老的任务(DisacardOldest)，或由主线程来直接执行(CallerRuns)，或你自己发挥想象力写的一个。
 
 # Spring
 
@@ -267,6 +277,10 @@ FactoryBean 是一个类似于 AbstractFactory，在获取 Bean 的时候如果�
 ## Spring AOP
 
 AOP 面向切面编程，生成代理类
+
+### spring事务传播机制如何实现的
+
+### spring aop使用注意点是什么
 
 ## Spring Bean 创建过程
 
@@ -321,7 +335,7 @@ ACID:原子(atomicity)，一致性(consistency)，隔离性(isolation)，持久�
 
 ### 聚集索引
 
-- 聚集索引：索引中键值的逻辑顺序决定了表中相应行的物理顺序（索引中的数据物理存放地址和索引的顺序是一致的）。
+- 聚集索引：索引中键值的逻辑顺序决定了表中相应行的物理顺序（索引中的数据物理存放地址和索引的顺序是一致的）；索引的叶子节点放置的是表列数据。
 - 非聚集索引：索引的逻辑顺序与磁盘上的物理存储顺序不同。
 
 Inno DB 的聚集索引规则：
