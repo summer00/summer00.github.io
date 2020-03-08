@@ -28,11 +28,15 @@ categories: [summary]
     - [Semaphore](#semaphore)
     - [总结](#%e6%80%bb%e7%bb%93)
 - [Java 基础](#java-%e5%9f%ba%e7%a1%80)
-  - [悲观锁和乐观锁的区别](#%e6%82%b2%e8%a7%82%e9%94%81%e5%92%8c%e4%b9%90%e8%a7%82%e9%94%81%e7%9a%84%e5%8c%ba%e5%88%ab)
   - [jdk8 ～ 11 升级](#jdk8--11-%e5%8d%87%e7%ba%a7)
-  - [创建多少线程才是合适的](#%e5%88%9b%e5%bb%ba%e5%a4%9a%e5%b0%91%e7%ba%bf%e7%a8%8b%e6%89%8d%e6%98%af%e5%90%88%e9%80%82%e7%9a%84)
+    - [java 8:](#java-8)
   - [String s = new String("abc") 产生了几个对象？分别放在哪里？JDK1.8 前后存放的区域有什么不同？](#string-s--new-string%22abc%22-%e4%ba%a7%e7%94%9f%e4%ba%86%e5%87%a0%e4%b8%aa%e5%af%b9%e8%b1%a1%e5%88%86%e5%88%ab%e6%94%be%e5%9c%a8%e5%93%aa%e9%87%8cjdk18-%e5%89%8d%e5%90%8e%e5%ad%98%e6%94%be%e7%9a%84%e5%8c%ba%e5%9f%9f%e6%9c%89%e4%bb%80%e4%b9%88%e4%b8%8d%e5%90%8c)
+  - [线程的生命周期](#%e7%ba%bf%e7%a8%8b%e7%9a%84%e7%94%9f%e5%91%bd%e5%91%a8%e6%9c%9f)
+    - [通用的五个状态：](#%e9%80%9a%e7%94%a8%e7%9a%84%e4%ba%94%e4%b8%aa%e7%8a%b6%e6%80%81)
+    - [Java中的生命周期](#java%e4%b8%ad%e7%9a%84%e7%94%9f%e5%91%bd%e5%91%a8%e6%9c%9f)
+  - [悲观锁和乐观锁的区别](#%e6%82%b2%e8%a7%82%e9%94%81%e5%92%8c%e4%b9%90%e8%a7%82%e9%94%81%e7%9a%84%e5%8c%ba%e5%88%ab)
   - [ThreadPoolExecutor 的工作流程](#threadpoolexecutor-%e7%9a%84%e5%b7%a5%e4%bd%9c%e6%b5%81%e7%a8%8b)
+  - [创建多少线程才是合适的](#%e5%88%9b%e5%bb%ba%e5%a4%9a%e5%b0%91%e7%ba%bf%e7%a8%8b%e6%89%8d%e6%98%af%e5%90%88%e9%80%82%e7%9a%84)
 - [Spring](#spring)
   - [Spring IOC](#spring-ioc)
   - [流程](#%e6%b5%81%e7%a8%8b)
@@ -41,8 +45,8 @@ categories: [summary]
   - [bean 生命周期](#bean-%e7%94%9f%e5%91%bd%e5%91%a8%e6%9c%9f)
   - [FactoryBean](#factorybean)
   - [Spring AOP](#spring-aop)
-    - [spring事务传播机制如何实现的](#spring%e4%ba%8b%e5%8a%a1%e4%bc%a0%e6%92%ad%e6%9c%ba%e5%88%b6%e5%a6%82%e4%bd%95%e5%ae%9e%e7%8e%b0%e7%9a%84)
-    - [spring aop使用注意点是什么](#spring-aop%e4%bd%bf%e7%94%a8%e6%b3%a8%e6%84%8f%e7%82%b9%e6%98%af%e4%bb%80%e4%b9%88)
+    - [spring 事务传播机制如何实现的](#spring-%e4%ba%8b%e5%8a%a1%e4%bc%a0%e6%92%ad%e6%9c%ba%e5%88%b6%e5%a6%82%e4%bd%95%e5%ae%9e%e7%8e%b0%e7%9a%84)
+    - [spring aop 使用注意点是什么](#spring-aop-%e4%bd%bf%e7%94%a8%e6%b3%a8%e6%84%8f%e7%82%b9%e6%98%af%e4%bb%80%e4%b9%88)
   - [Spring Bean 创建过程](#spring-bean-%e5%88%9b%e5%bb%ba%e8%bf%87%e7%a8%8b)
 - [分布式缓存设计](#%e5%88%86%e5%b8%83%e5%bc%8f%e7%bc%93%e5%ad%98%e8%ae%be%e8%ae%a1)
   - [问题与解决](#%e9%97%ae%e9%a2%98%e4%b8%8e%e8%a7%a3%e5%86%b3)
@@ -148,7 +152,10 @@ categories: [summary]
 ## synchronized 原理
 
 - 可重入、互斥锁
-- 三种使用方式：1）修饰方法，锁定当前对象 2）修饰静态方法，锁定的当前类的 Class 实例 3）修饰代码块，锁定指定的对象
+- 三种使用方式：
+  - 1）修饰方法，锁定当前对象 
+  - 2）修饰静态方法，锁定的当前类的 Class 实例 
+  - 3）修饰代码块，锁定指定的对象
 - synchronized 用的锁是存在 Java 对象头里的。JVM 基于进入和退出 Monitor 对象来实现方法同步和代码块同步。代码块同步是使用 monitorenter 和 monitorexit 指令实现的，monitorenter 指令是在编译后插入到同步代码块的开始位置，而 monitorexit 是插入到方法结束处和异常处。任何对象都有一个 monitor 与之关联，当且一个 monitor 被持有后，它将处于锁定状态。根据虚拟机规范的要求，在执行 monitorenter 指令时，首先要去尝试获取对象的锁，如果这个对象没被锁定，或者当前线程已经拥有了那个对象的锁，把锁的计数器加 1；相应地，在执行 monitorexit 指令时会将锁计数器减 1，当计数器被减到 0 时，锁就释放了。如果获取对象锁失败了，那当前线程就要阻塞等待，直到对象锁被另一个线程释放为止。
 
 ## 内存溢出问题排查
@@ -203,6 +210,65 @@ Semaphore 翻译成字面意思为 信号量，Semaphore 可以控同时访问�
 
 # Java 基础
 
+## jdk8 ～ 11 升级
+
+### java 8:
+1. lambda 表达式：匿名内部类的特殊化，函数式接口对象的实现。但与匿名内部类不同，每个内部类都有独立的类文件，类加载增加了相当打的运行时开销，lambda 没有使用独立的类文件，而是使用了 invokedynamic 字节码指令，避免了独立类文件的空间开销以及加载类的大量运行时开销。
+  
+2. hotSpots 取消了永久代，增加了元空间。元空间存在于本地内存，是 jvm 规范中的方法区的实现。原因是这样元空间的大小仅受本地内存的限制。
+3. Metaspace
+   - 什么是 Metaspace ：用来存放class metadata（记录一个java类在jvm中的信息），如Klass结构（java类在虚拟机内部的表示）、method metadata（方法的字节码、局部变量表、异常表、参数等信息）、常量池、注解、方法计数器（记录方法调用次数，辅助JIT决策）
+    - 什么时候分配 Metaspace ：当一个类加载时，他的类加载器会负责在 Metaspace 中分配空间
+    - 什么时候回收 Metaspace ：分配给一个类的空间，归属与这个类的类加载器，只有当这个类加载器卸载的时候，这个空间才会被释放。所以，只有当这个类加载器加载的所有类都没有存活的对象，并且没有到达这些类和类加载器的引用时，相应的 Metaspace 才会被释放。一个例外是匿名内部类，他们拥有自己独立的 ClassLoaderData，它的生命周期是跟随这个匿名类的，而不是类加载器。
+    - Metaspace GC：
+      - 分配空间时：当已分配的空间超过阈值时，虚拟机会在新的空间分配申请时收集可以卸载的类加载器，从而达到空间复用的目的，而不是扩大空间，这时会出发GC。这个阈值会上下调整，和 Metaspace 已经占用的操作系统内存保持一个距离
+      - 碰到 Metaspace OOM时：Metaspace 的总使用空间达到了 MaxMetaspaceSize 设置的阈值，或者 Compressed Class Space 被使用光了，如果这次 GC 真的通过卸载类加载器腾出了很多的空间，这很好，否则的话，我们会进入一个糟糕的 GC 周期，即使我们有足够的堆内存。**所以千万不要将 MaxMetaspaceSize 设置得太小**
+
+## String s = new String("abc") 产生了几个对象？分别放在哪里？JDK1.8 前后存放的区域有什么不同？
+
+2 个对象：堆中`new String()`;字符串常量池中`abc`
+
+JDK1.8 后，字符串常量池从永久代移动到了堆中。为什么呢？
+
+1. 字符串在永久代中，容易出现性能问题和内存溢出
+2. 永久代会为 GC 带来不必要的复杂度，并且回收效率偏低
+
+## 线程的生命周期
+
+### 通用的五个状态：
+1. 初始：指的是线程已经被创建，但是还不允许分配 CPU 执行。这个状态属于编程语言特有的，不过这里所谓的被创建，仅仅是在编程语言层面被创建，而在操作系统层面，真正的线程还没有创建
+2. 可运行：指的是线程可以分配 CPU 执行。在这种状态下，真正的操作系统线程已经被成功创建了，所以可以分配 CPU 执行
+3. 运行：当有空闲的 CPU 时，操作系统会将其分配给一个处于可运行状态的线程，被分配到 CPU 的线程的状态就转换成了运行状态
+4. 休眠：运行状态的线程如果调用一个阻塞的 API（例如以阻塞方式读文件）或者等待某个事件（例如条件变量），那么线程的状态就会转换到休眠状态，同时释放 CPU 使用权，休眠状态的线程永远没有机会获得 CPU 使用权。当等待的事件出现了，线程就会从休眠状态转换到可运行状态
+5. 终止：线程执行完或者出现异常就会进入终止状态，终止状态的线程不会切换到其他任何状态，进入终止状态也就意味着线程的生命周期结束了
+
+### Java中的生命周期
+1. NEW（初始化）
+2. RUNNABLE（可运行/运行）
+3. BLOCKED（阻塞）
+4. WAITING（无时限等待）
+5. TIMED_WAITING（有时限等待）
+6. TERMINATED（终止）
+
+![ thread status ]({{ "/assets/2020-02-22-1.png" | absolute_url }})
+
+状态转换：
+1. RUNNABLE 与 BLOCKED 的状态转换：只有一种场景会触发这种转换，就是线程等待 synchronized 的隐式锁。synchronized 修饰的方法、代码块同一时刻只允许一个线程执行，其他线程只能等待，这种情况下，等待的线程就会从 RUNNABLE 转换到 BLOCKED 状态。而当等待的线程获得 synchronized 隐式锁时，就又会从 BLOCKED 转换到 RUNNABLE 状态
+2. RUNNABLE 与 WAITING 的状态转换：
+  - 获得 synchronized 隐式锁的线程，调用无参数的 Object.wait() 方法
+  - 调用无参数的 Thread.join() 方法
+  - 调用 LockSupport.park() 方法。其中的 LockSupport 对象，也许你有点陌生，其实 Java 并发包中的锁，都是基于它实现的。调用 LockSupport.park() 方法，当前线程会阻塞，线程的状态会从 RUNNABLE 转换到 WAITING。调用 LockSupport.unpark(Thread thread) 可唤醒目标线程，目标线程的状态又会从 WAITING 状态转换到 RUNNABLE
+3. RUNNABLE 与 TIMED_WAITING 的状态转换
+  - 调用带超时参数的 Thread.sleep(long millis) 方法
+  - 获得 synchronized 隐式锁的线程，调用带超时参数的 Object.wait(long timeout) 方法
+  - 调用带超时参数的 Thread.join(long millis) 方法
+  - 调用带超时参数的 LockSupport.parkNanos(Object blocker, long deadline) 方法
+  - 调用带超时参数的 LockSupport.parkUntil(long deadline) 方法
+4. 从 NEW 到 RUNNABLE 状态
+5. 从 RUNNABLE 到 TERMINATED 状态
+  - 运行完成后 或 抛出异常
+  - 强制终止：`stop()` `interrupt()`。被interrupt的线程可以通过异常或主动检测的方式收到通知。
+
 ## 悲观锁和乐观锁的区别
 
 优点：
@@ -216,24 +282,6 @@ Semaphore 翻译成字面意思为 信号量，Semaphore 可以控同时访问�
 - ABA 问题
 - 活锁和饥俄问题
 
-## jdk8 ～ 11 升级
-
-## 创建多少线程才是合适的
-
-在并发编程领域，提升性能本质上就是提升硬件的利用率，再具体点来说，就是提升 I/O 的利用率和 CPU 的利用率。单核时代多线程用来平衡 I/O 和 CPU。多核时代用来充分利用 CPU。
-
-- 对于 CPU 密集型计算，多线程本质上是提升多核 CPU 的利用率。对于 CPU 密集型的计算场景，理论上“线程的数量 =CPU 核数”就是最合适的。不过在工程上，线程的数量一般会设置为“CPU 核数 +1”，这样的话，当线程因为偶尔的内存页失效或其他原因导致阻塞时，这个额外的线程可以顶上，从而保证 CPU 的利用率
-- 对于 I/O 密集型的计算场景，遵循这个公式`最佳线程数 =CPU 核数 * [ 1 +（I/O 耗时 / CPU 耗时）]`
-
-## String s = new String("abc") 产生了几个对象？分别放在哪里？JDK1.8 前后存放的区域有什么不同？
-
-2 个对象：堆中`new String()`;字符串常量池中`abc`
-
-JDK1.8 后，字符串常量池从永久代移动到了堆中。为什么呢？
-
-1. 字符串在永久代中，容易出现性能问题和内存溢出
-2. 永久代会为 GC 带来不必要的复杂度，并且回收效率偏低
-
 ## ThreadPoolExecutor 的工作流程
 
 1. 每次提交任务时，如果线程数还没达到 coreSize 就创建新线程并绑定该任务。所以第 coreSize 次提交任务后线程总数必达到 coreSize，不会重用之前的空闲线程。在生产环境，为了避免首次调用超时，可以调用 executor.prestartCoreThread()预创建所有 core 线程，避免来一个创一个带来首次调用慢的问题。
@@ -244,7 +292,14 @@ JDK1.8 后，字符串常量池从永久代移动到了堆中。为什么呢？
 
 4. 临时线程使用 poll(keepAliveTime，timeUnit)来从工作队列拉活，如果时候到了仍然两手空空没拉到活，表明它太闲了，就会被解雇掉。
 
-5. 如果 core 线程数＋临时线程数 >maxSize，则不能再创建新的临时线程了，转头执行 RejectExecutionHanlder。默认的 AbortPolicy 抛 RejectedExecutionException 异常，其他选择包括静默放弃当前任务(Discard)，放弃工作队列里最老的任务(DisacardOldest)，或由主线程来直接执行(CallerRuns)，或你自己发挥想象力写的一个。
+5. 如果 core 线程数＋临时线程数 > maxSize，则不能再创建新的临时线程了，转头执行 RejectExecutionHanlder。默认的 AbortPolicy 抛 RejectedExecutionException 异常，其他选择包括静默放弃当前任务(Discard)，放弃工作队列里最老的任务(DisacardOldest)，或由主线程来直接执行(CallerRuns)，或你自己发挥想象力写的一个。
+
+## 创建多少线程才是合适的
+
+在并发编程领域，提升性能本质上就是提升硬件的利用率，再具体点来说，就是提升 I/O 的利用率和 CPU 的利用率。单核时代多线程用来平衡 I/O 和 CPU。多核时代用来充分利用 CPU。
+
+- 对于 CPU 密集型计算，多线程本质上是提升多核 CPU 的利用率。对于 CPU 密集型的计算场景，理论上“线程的数量 =CPU 核数”就是最合适的。不过在工程上，线程的数量一般会设置为“CPU 核数 +1”，这样的话，当线程因为偶尔的内存页失效或其他原因导致阻塞时，这个额外的线程可以顶上，从而保证 CPU 的利用率
+- 对于 I/O 密集型的计算场景，遵循这个公式`最佳线程数 =CPU 核数 * [ 1 +（I/O 耗时 / CPU 耗时）]`
 
 # Spring
 
@@ -278,9 +333,12 @@ FactoryBean 是一个类似于 AbstractFactory，在获取 Bean 的时候如果�
 
 AOP 面向切面编程，生成代理类
 
-### spring事务传播机制如何实现的
+### spring 事务传播机制如何实现的
 
-### spring aop使用注意点是什么
+### spring aop 使用注意点是什么
+
+1. 只有public方法才能使用aop的方式增强实现。因为spring aop是通过动态代理实现的
+2. 在类内部的方法互相调用不会被增强实现。因为类内部通过this互相调用，而不是spring生成的代理对象
 
 ## Spring Bean 创建过程
 
