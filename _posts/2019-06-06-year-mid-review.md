@@ -1,7 +1,7 @@
 ---
 title:  "2019年中总结"
 date:   2019-06-06 15:00:00 +0800
-categories: [note]
+categories: [review]
 ---
 
 # 2019年中总结

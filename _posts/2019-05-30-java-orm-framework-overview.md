@@ -1,3 +1,9 @@
+---
+title:  "Java ORM对比"
+date:   2019-05-30 15:00:00 +0800
+categories: [database]
+---
+
 # Jpa
 
 ## 在使用 Jpa 或者 Hibernate 前需要先考虑几个问题：

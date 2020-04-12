@@ -1,7 +1,7 @@
 ---
 title:  "2019年度总结"
 date:   2020-01-19 15:00:00 +0800
-categories: [note]
+categories: [review]
 ---
 
 # 2019年度总结
