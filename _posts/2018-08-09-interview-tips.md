@@ -1,7 +1,7 @@
 ---
 title: "面试小抄"
 date: 2018-08-09 17:00:00 +0800
-categories: [summary]
+categories: [summary, iv]
 ---
 
 - [JVM](#jvm)

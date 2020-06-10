@@ -1,7 +1,7 @@
 ---
 title: "架构整洁之道"
 date: 2020-05-23 00:30:00 +0800
-categories: [note, book]
+categories: [note-book]
 ---
 
 本文是对《架构整洁之道》一书的读书笔记。

@@ -1,7 +1,7 @@
 ---
 title:  "JVM 概览"
 date:   2018-08-03 15:37:48 +0800
-categories: [summary]
+categories: [summary, jvm, iv]
 ---
 
 本篇是对JVM基本概念的回顾，主要参考了《深入理解Java虚拟机》。

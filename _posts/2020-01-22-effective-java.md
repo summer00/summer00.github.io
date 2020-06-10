@@ -1,7 +1,7 @@
 ---
 title: "Effective Java"
 date: 2020-04-04 15:00:00 +0800
-categories: [note]
+categories: [book-note]
 ---
 
 # Chapter 3. Methods Common to All Objects

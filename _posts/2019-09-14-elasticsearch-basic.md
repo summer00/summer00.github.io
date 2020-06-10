@@ -1,7 +1,7 @@
 ---
 title: "Elasticsearch基础知识"
 date: 2019-09-14 12:00:00 +0800
-categories: [database]
+categories: [database, mid, iv]
 ---
 
 - [基本概念](#%e5%9f%ba%e6%9c%ac%e6%a6%82%e5%bf%b5)

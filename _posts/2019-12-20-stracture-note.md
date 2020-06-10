@@ -1,36 +1,36 @@
 ---
 title:  "从零开始学架构--读书笔记"
 date:   2019-12-20 12:00:00 +0800
-categories: [note]
+categories: [book-note]
 ---
 
 本篇为我阅读[《从零开始学架构》](https://book.douban.com/subject/33425123/)的读书笔记。如觉得有帮助，请购买正版图书学习。
 
-- [高性能存储](#%e9%ab%98%e6%80%a7%e8%83%bd%e5%ad%98%e5%82%a8)
-  - [关系型数据库](#%e5%85%b3%e7%b3%bb%e5%9e%8b%e6%95%b0%e6%8d%ae%e5%ba%93)
-    - [读写分离](#%e8%af%bb%e5%86%99%e5%88%86%e7%a6%bb)
-    - [业务分库](#%e4%b8%9a%e5%8a%a1%e5%88%86%e5%ba%93)
-    - [分表](#%e5%88%86%e8%a1%a8)
+- [高性能存储](#高性能存储)
+  - [关系型数据库](#关系型数据库)
+    - [读写分离](#读写分离)
+    - [业务分库](#业务分库)
+    - [分表](#分表)
   - [NoSQL](#nosql)
-    - [K-V存储（Redis为例）](#k-v%e5%ad%98%e5%82%a8redis%e4%b8%ba%e4%be%8b)
-    - [文档数据库](#%e6%96%87%e6%a1%a3%e6%95%b0%e6%8d%ae%e5%ba%93)
-    - [列式数据库](#%e5%88%97%e5%bc%8f%e6%95%b0%e6%8d%ae%e5%ba%93)
-    - [全文搜索引擎](#%e5%85%a8%e6%96%87%e6%90%9c%e7%b4%a2%e5%bc%95%e6%93%8e)
-  - [缓存](#%e7%bc%93%e5%ad%98)
-- [计算高性能](#%e8%ae%a1%e7%ae%97%e9%ab%98%e6%80%a7%e8%83%bd)
-  - [单机高性能](#%e5%8d%95%e6%9c%ba%e9%ab%98%e6%80%a7%e8%83%bd)
+    - [K-V存储（Redis为例）](#k-v存储redis为例)
+    - [文档数据库](#文档数据库)
+    - [列式数据库](#列式数据库)
+    - [全文搜索引擎](#全文搜索引擎)
+  - [缓存](#缓存)
+- [计算高性能](#计算高性能)
+  - [单机高性能](#单机高性能)
     - [PPC(Process per Connection)](#ppcprocess-per-connection)
     - [pre-fork](#pre-fork)
     - [TPC(Thread per Connection)](#tpcthread-per-connection)
     - [pre-thread](#pre-thread)
     - [Reactor(Dispatcher)](#reactordispatcher)
     - [Proactor](#proactor)
-  - [集群高性能](#%e9%9b%86%e7%be%a4%e9%ab%98%e6%80%a7%e8%83%bd)
-    - [负载均衡](#%e8%b4%9f%e8%bd%bd%e5%9d%87%e8%a1%a1)
+  - [集群高性能](#集群高性能)
+    - [负载均衡](#负载均衡)
 - [CAP](#cap)
-  - [解释：](#%e8%a7%a3%e9%87%8a)
-  - [应用](#%e5%ba%94%e7%94%a8)
-  - [ACID 和 BASE](#acid-%e5%92%8c-base)
+  - [解释：](#解释)
+  - [应用](#应用)
+  - [ACID 和 BASE](#acid-和-base)
 
 # 高性能存储
 

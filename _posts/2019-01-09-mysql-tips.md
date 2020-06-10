@@ -1,7 +1,7 @@
 ---
 title:  "MySQL使用注意点"
 date:   2019-01-09 15:00:00 +0800
-categories: [database]
+categories: [database, mid]
 ---
 # 测试数据库
 

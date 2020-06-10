@@ -1,7 +1,7 @@
 ---
 title:  "The difference between healthy and unhealthy love"
 date:   2019-09-01 12:00:00 +0800
-categories: [English, Ted]
+categories: [English, video]
 ---
 
 [Video](https://www.bilibili.com/video/av63700063?from=search&seid=8456410744236513949)

@@ -1,7 +1,7 @@
 ---
 title: "IT konekt 2019 Note"
 date: 2020-05-23 00:30:00 +0800
-categories: [note, video]
+categories: [video, English]
 ---
 
 # Clean Architecture

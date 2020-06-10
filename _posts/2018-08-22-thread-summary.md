@@ -1,7 +1,7 @@
 ---
 title:  "Java多线程 概览"
 date:   2018-08-23 13:00:00 +0800
-categories: [summary, thread]
+categories: [summary, thread, iv]
 ---
 
 # 可用性问题

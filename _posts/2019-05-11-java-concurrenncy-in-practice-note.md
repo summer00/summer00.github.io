@@ -1,7 +1,7 @@
 ---
 title:  "Java并发编程学习笔记"
 date:   2019-05-11 15:00:00 +0800
-categories: [summary, thread]
+categories: [book-note, thread]
 ---
 
 # 二、 线程安全性

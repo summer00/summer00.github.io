@@ -1,7 +1,7 @@
 ---
 title: "微服务架构设计模式--读书笔记"
 date: 2019-11-28 12:00:00 +0800
-categories: [note]
+categories: [book-note]
 ---
 
 本篇为我阅读[《微服务架构设计模式》](https://book.douban.com/subject/33425123/)的读书笔记。如觉得有帮助，请购买正版图书学习。

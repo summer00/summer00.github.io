@@ -1,7 +1,7 @@
 ---
 title:  "他们的真实意思是什么"
 date:   2019-09-21 12:00:00 +0800
-categories: [English]
+categories: [English, video]
 ---
 
 See this BBC video on YouTube, it's really interesting. Here is the link.

@@ -1,7 +1,7 @@
 ---
 title: "SQL优化"
 date: 2019-09-07 12:00:00 +0800
-categories: [database]
+categories: [database, mid, iv]
 ---
 
 - [索引](#%e7%b4%a2%e5%bc%95)
