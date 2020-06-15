@@ -58,6 +58,7 @@ categories: [summary, thread, iv]
 
 1. **Thread Pre Message**：为每个任务创建一个线程，由于java的线程创建和操作系统一一对应，是很重量级的对象，所以在java中使用这种模式并不常见。可以使用线程池的方式优化此模式，或者使用轻量级的协程
 2. **Worker Tread**：线程池加阻塞队列
+3. **Immutability**:状态不变对象天然线程安全
 
 ## 线程池创建的注意点：
 
