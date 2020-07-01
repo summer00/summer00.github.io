@@ -437,7 +437,7 @@ Inno DB 的聚集索引规则：
 
 ## Recipes
 
-1. 混合 精确查询和提取词干：对于搜索应用，提取词干（stemming）都是必须的。例如查询 skiing 时，ski 和 skis 都是期望的结果。解决方法是：使用 multi-field。同一份内容，以两种不同的方式来索引存储
+1. 混合精确查询和提取词干：对于搜索应用，提取词干（stemming）都是必须的。例如查询 skiing 时，ski 和 skis 都是期望的结果。解决方法是：使用 multi-field。同一份内容，以两种不同的方式来索引存储
 2. 获取一致性的打分。原因就是标注为“已删除”的文档。如你所知，doc 更新或删除时，旧 doc 并不删除，而是标注为“已删除”，只有等到 旧 doc 所在的 segment 被 merge 时，“已删除”的 doc 才会从磁盘删除掉。索引统计（index statistic）是打分时非常重要的一部分，但由于 deleted doc 的存在，在同一个 shard 的不同 copy（即：各个 replica）上 计算出的 索引统计 并不一致。
    - 使用`preference`参数查询，例如 user session 为`xyzabc123`，查询为`GET /_search?preference=xyzabc123`
    - 如果数据很少，可以将所有数据放到一个 shards 中

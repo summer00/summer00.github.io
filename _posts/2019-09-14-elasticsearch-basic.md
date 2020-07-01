@@ -45,7 +45,7 @@ categories: [database, mid, iv]
 - 文档（document）: 最小数据单元，可以是一条用户数据，通常用 json 数据结构表示
 - 索引（index）: 包含多个 document，表示一类类型的 document
 - 类型（type）: type 是 index 中的逻辑数据分类，一个 type 下的 document 拥有相同的 fields。已经不推荐使用
-- 碎片（shard）: 一个 document 会被拆分成多个 shard，分布在不同的机器中。好处：1）横向扩展；2）并行计算
+- 碎片（shard）: 一个 index 会被拆分成多个 shard，分布在不同的机器中。好处：1）横向扩展；2）并行计算
 - 复制（replica）: shard 的备份
 
 # 基本接口
@@ -71,7 +71,7 @@ GET /{index-name}/_mapping // 获取index的mapping类型
 ## 文档操作
 
 ```
-PUT /{index-name}/_doc/1 //创建
+PUT /{index-name}/_doc/1 //创建，若id为1的文档已存在会更新
 {
     "user" : "kim",
     "post_date" : "2009-11-15T14:12:12",
@@ -228,7 +228,7 @@ PUT /{index-name}/_analyze
 
 1. character filter：预处理，去除干扰项目
 2. tokenizer：分词
-3. token filter：大小写，去停，同义词；
+3. token filter：二次加工，比如：大小写，去停，同义词
 
 ## mapping
 
