@@ -1,7 +1,7 @@
 ---
 title: "内存溢出排查：sharding-jdbc+tomcat datasource + mybatis"
 date: 2020-06-29 18:00:00 +0800
-categories: [bug-snapshot， jvm]
+categories: [bug-snapshot, jvm]
 ---
 
 # 问题描述
