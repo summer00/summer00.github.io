@@ -264,14 +264,17 @@ MySQL5.5 之前官方支持单线程复制，如果主库并发度比较高，�
 ## 怎样快速地复制一张表
 
 1. `mysqldump`
+
    ```sql
    mysqldump -h$host -P$port -u$user --add-locks=0 --no-create-info --single-transaction  --set-gtid-purged=OFF db1 t --where="a>900" --result-file=/client_tmp/t.sql
 
    mysql -h127.0.0.1 -P13000  -uroot db2 -e "source /client_tmp/t.sql"
    ```
-2. 导出csv文件
+
+2. 导出 csv 文件
+
    ```sql
    select * from db1.t where a>900 into outfile '/server_tmp/t.csv';
-   
+
    load data infile '/server_tmp/t.csv' into table db2.t;
    ```
