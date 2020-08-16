@@ -48,9 +48,51 @@ categories: [summary, thread, iv]
 - 解决问题：自旋锁的目标是降低线程切换的成本
 - 实现：使用轻量级锁时，不需要申请互斥量，仅仅*将 Mark Word 中的部分字节 CAS 更新指向线程栈中的 Lock Record，如果更新成功，则轻量级锁获取成功*，记录锁状态为轻量级锁；否则，说明已经有线程获得了轻量级锁，目前发生了锁竞争（不适合继续使用轻量级锁），接下来膨胀为重量级锁
 
-## volatile 原理
+## volatile
 
-- 被 volatile 修饰的变量，在线程之间是可见的
+1. 语意：
+   1. 保证可见性。在变量改变需要依赖当前值，或者需要与其他变量共同参与不变性约束时需要额外同步来保证原子性
+   2. 禁止指令重排优化。通过在编译时加入一个 lock 前缀指令，相当于内存屏障
+2. 当且仅当完全满足以下条件时，才可以使用 volatile:
+   1. 写入不依赖当前值，或者保证只有单线程修改这个值
+   2. 该变量的值不会与其他状态变量一起纳入不变性条件
+   3. 在访问变量时不需要加锁
+
+# J.U.C
+
+## 并发容器
+
+1. `ConcurrentHashMap`
+   1. 1.8 之前通过分段锁保护减小锁粒度提高并发
+   2. 1.8 改为`synchronized`内部`node`方式保护，进一步提高并发
+   3. 不能放`null`的`key`和`value`原因是避免多线程环境下模糊的语义。如`get`的结果为`null`无法判断是真的没有值，还是值是空。在单线程环境可以通过`containKey`判断，但多线程情况下该操作并不是原子性的
+2. `CopyOnWriteArrayList`
+   1. 读写分离的思想，写的时候复制一份内部数组，不修改之前的对象，此时发布出去的数组对象可以看为是不可变的
+   2. 1.8 之前用`ReentrantLock`加锁保护，复制一份内部数组
+   3. 1.8 改为写入时加`synchronized`内部`object`锁保护，复制一份内部数组
+3. `Queue`
+   1. 非阻塞队列
+   2. 阻塞队列
+
+## Atomic
+
+提供原子性的操作，常用` AtomicBoolean``AtomicInteger``AtomicReference `
+
+## 同步工具
+
+1. `CountDownLatch`
+2. `CyclicBarrier`
+3. `Semaphore`
+
+## 锁
+
+1. `ReentrantLock`
+   1. `Condition`条件判断
+   2. 是否公平
+2. `ReentrantReadWriteLock`
+3.
+
+## AQS
 
 # 实用
 
