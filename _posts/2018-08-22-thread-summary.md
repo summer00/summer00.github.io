@@ -88,11 +88,13 @@ categories: [summary, thread, iv]
 
 1. `ReentrantLock`
    1. `Condition`条件判断
-   2. 是否公平
+   2. 内部类`NonfairSync`和`FairSync`提供是否公平的锁支持
 2. `ReentrantReadWriteLock`
 3.
 
 ## AQS
+
+AQS 维护了一个`volatile int state`（代表共享资源）和一个 FIFO 现场等待队列（多线程争用资源被阻塞时会进入此队列）。AQS 定义了两种资源共享方式 Exclusive（独占）、Share（共享）。
 
 # 实用
 
