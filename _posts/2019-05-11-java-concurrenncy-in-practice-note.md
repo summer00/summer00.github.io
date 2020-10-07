@@ -165,7 +165,7 @@ public boolean isInterrupted() {...}
 
 ### 通过`Future`来实现取消
 
-`Future`拥有一个`cannel()`方法，该方法的参数`mayInterruptIfRunning`表示任务已经开始了是否还可以取消，取消成功会返回`true`。
+`Future`拥有一个`cannel()`方法，该方法的参数`mayInterruptIfRunning`表示任务已经开始了是否还可以取消，取消成功会返回`true`。只有当你知道一个任务实现了中断策略时`mayInterruptIfRunning`设置为`true`才是安全的。
 
 ### 处理不可中断的阻塞
 
@@ -173,3 +173,55 @@ public boolean isInterrupted() {...}
 2. Java.io 包中的同步 I/O
 3. Selector 的异步 I/O：调用` close``wakeup `方法会抛出异常
 4. 获取某个锁：如果等待某个内置锁，那么将无法相应中断。`Lock`类中`lockInterruptibly`方法允许等等锁的同时响应中断
+
+## 停止基于线程的服务
+
+对于线程持有的服务，只要服务的存在时间大于创建线程的方法存在的时间，那么就是应该提供生命周期的方法。`ExecutorService`提供了`shutdown`和`shutdownNow`方法。
+
+### `ExecutorService`关闭
+
+可以用`shutdown`和`shutdownNow`方法关闭。`shutdownNow`表示立刻关闭，是强制关闭，可以通过进一步封装`ExecutorService`得到关闭后取消的任务。
+
+### 致命药丸（poison pill）
+
+可以使用致命药丸（poison pill）方式来保证生产者和消费者的关闭：一个可以识别的对象，置于队列中，如果得到它，就停止一切工作。只有在生产者和消费者的数量都已知的情况下，才能使用“毒丸”对象。
+
+## 处理非正常的线程终止
+
+线程非正常退出的后果可能是良性的，也可能是恶性的。若使用线程池，非正常终断会使线程池中的线程数减少。任何操作都可能带来`RuntimeException`，所以在调用方法时要保持怀疑。
+
+## JVM 关闭
+
+正常关闭：
+
+1. 最后一个“正常（非守护）”结束
+2. 调用`System.exit`
+3. 特定平台的方法关闭
+
+非正常关闭：
+
+1. 调用`Runtime.halt`
+2. 操作系统杀死 JVM 进程
+
+### 关闭钩子（Shutdown Hook）
+
+在正常关闭中，会执行系统中已经设置的所有通过方法 addShutdownHook 添加的钩子，当系统执行完这些钩子后，jvm 才会关闭。
+
+注意点：
+
+- 何时增加关闭钩子：任何时候！！！在任何情况下都可以增加一个关闭钩子，只要在 JVM 关闭之前。如果试图在 JVM 开始关闭后注册一个关闭钩子，将抛出一个带有”Shutdown is progress”消息的 IllegalStateException。
+- 增加相同的钩子：不能增加相同的钩子。如果这样做了，将抛出带有”Hook previously registered”消息的 IllegalArgumentException。
+- 注销钩子：调用 Runtime.removeShutdownShook(Thread hook)可以注销一个钩子。
+- 注意并发：万一不止一个关闭钩子，它们将并行地运行，并容易引发线程问题，例如死锁
+- 关闭钩子的可靠性：JVM 将在退出的时候尽最大努力来执行关闭钩子，但是不保证一定会执行。例如，当在 Linux 中使用-kill 命令时，或在 Windows 中终结进程时，由于本地代码被调用，JVM 将立即退出或崩溃。
+- 注意钩子的时间消耗：需要注意的重点之一是，关闭钩子不应该花费过多时间。考虑这样一个场景，当用户从操作系统中注销，操作系统花费非常有限的时间就正常退出了，因此在这样样的场景下 JVM 也应该尽快退出。
+
+### 守护线程
+
+用来做辅助功能的线程，不会阻碍 JVM 关闭。当 JVM 停止时，所有仍然存在的守护线程都将被抛弃（既不会执行 finally，也不会执行回卷栈），直接退出。应该尽量少用守护线程，因为很少有操作能够在不进行清理的情况下被安全的抛弃。特别注意，如果在守护线程中包含 I/O 操作的任务，是一件危险行为。
+
+### 终结器
+
+finalize 是基础类 java.lang.Object 的一个方法，它的设计目的是保证对象在被垃圾收集前完成特定资源的回收。finalize 机制现在已经不推荐使用，并且在 JDK 9 开始被标记为 deprecated。
+
+finalize 的执行是和垃圾收集关联在一起的，一旦实现了非空的 finalize 方法，就会导致相应对象回收呈现数量级上的变慢，有人专门做过 benchmark，大概是 40~50 倍的下降。finalize 被设计成在对象被垃圾收集前调用，这就意味着实现了 finalize 方法的对象是个“特殊公民”，JVM 要对它进行额外处理。finalize 本质上成为了快速回收的阻碍者，可能导致你的对象经过多个垃圾收集周期才能被回收。
