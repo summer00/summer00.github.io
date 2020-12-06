@@ -46,6 +46,12 @@ them.
 
 1. integration points: Every single one of those feeds presents a stability risk. Every socket, process, pipe, or remote procedure call can and will hang.
    1. socket-based protocols: Network failures can hit you in two ways: fast(connection refused) or slow(dropped ACK).
+   2. the ways that such an integration point can harm the caller:
+      1. The provider may accept the connection but never response to the HTTP request.
+      2. The provider may accept the connection but not read the request.
+      3. The provider may send back a response with the status the caller doesn't know how to handle.
+      4. The provider may send back a response with a content type the caller doesn’t expect or know how to handle.
+      5. The provider may claim to be sending JSON but actually sending plain text. 
 
 # Words
 
@@ -71,6 +77,7 @@ them.
 20. paranoid
 21. probe
 22. torn
+23. lingua france
 
 # Sentence
 
