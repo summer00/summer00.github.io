@@ -164,7 +164,11 @@ MySQL 查询计划关注的值：
 
 # 事务
 
-事务特性：原子(atomicity)，一致性(consistency)，隔离性(isolation)，持久性(durability)
+事务特性：
+1. 原子(atomicity)，事务最终状态只有两种，全部成功或全部不执行。
+2. 一致性(consistency)，事务操作前后，数据满足完整性约束，数据库保持一致状态。
+3. 隔离性(isolation)，当多个事务并发使用相同数据时，不会互相干扰。
+4. 持久性(durability)，事务执行后数据被永久保存下来。
 
 隔离级别：
 
