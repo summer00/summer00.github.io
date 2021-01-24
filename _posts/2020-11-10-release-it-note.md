@@ -66,15 +66,82 @@ Every single one of those feeds presents a stability risk. Every socket, process
 
 **Remember this**
 
-1. _Beware this necessary evil_
-2. _Prepare for the many forms of failure_
-3. _Know when to open up abstractions_: Debugging integration point failures usually requires peeling back a layer of abstraction. Failures are often difficult to debug at the application layer because most of them violate the high-level protocols. Packet sniffers and other network diagnostics can help
-4. _Failures propagate quickly_
-5. _Apply patterns to avert integrate point problems_
+1. **Beware this necessary evil**
+2. **Prepare for the many forms of failure**
+3. **Know when to open up abstractions**: Debugging integration point failures usually requires peeling back a layer of abstraction. Failures are often difficult to debug at the application layer because most of them violate the high-level protocols. Packet sniffers and other network diagnostics can help
+4. **Failures propagate quickly**
+5. **Apply patterns to avert integrate point problems**
 
 ## Chain Reactions
 
 The dominant architectural style today is the horizontally scaled farm of commodity hardware. A chain reaction occurs when an application has some defect -- usually a resource leak or a load-related crash.
+
+### Remember This:
+
+- **Recognize that one server down jeopardizes the rest.**
+- **Hunt for resource leaks.** Most of time, a chain reaction happens when your application has a memory leak.
+- **Hunt for obscure time bugs.**
+- **Use Autoscaling.**
+- **Defend with Bulkheads.**
+
+## Cascading Failures
+
+Cascading failures often result from resource pools that get drained because of a failure in a lower layer. Integration points without timeouts are a surefire way to create cascading failures.
+
+### Remember This:
+
+- **Stop cracks from jumping the gap.** Your system surely calls out to other enterprise systems; make sure you can stay up when they go down.
+- Scrutinize resource pools. Safe resource pool always limit the time a thread can wait to check out a resource.
+- **Defend with Timeouts and Circuit Breaker.** Circuit Breaker protects your system by avoiding calls out to the troubled integration point. Using Timeouts ensures that you can come back from a call out to the troubled point.
+
+## Users
+
+Users are a terrible thing. System would be much better off with no users. Human users have a gift for doing exactly the worst possible thing at the worst possible time.
+
+### Traffic
+
+"Capacity" is the maximum throughput your system can sustain under a given workload while maintaining acceptable performance. When a transaction takes too long to execute, it means that the demand on your system exceeds its capacity.
+
+### Heap Memory
+
+One such hard limit is memory available, particularly in interpreted or man-aged code languages. When memory gets short, a large number of surprising things can happen.
+
+We always put session in memory. Every additional user
+means more memory. Weak references are a useful way to respond to changing memory conditions, but they do add complexity. When you can, it's best to just keep things out of the memory.
+
+### Off-Head Memory, Off-Host Memory
+
+Another effective way to deal with per-user memory is to farm it out to a different process. Instead of keeping it inside the heap—that is, inside the address space of your server’s process—move it out to some other process, like Memcached, Redis.
+
+### Sockets & Closed Sockets
+
+Your application will probably need some
+changes to listen on multiple IP addresses and handle connections across them all without starving any of the listen queues. A million connections also need a lot of kernel buffers. Plan to spend some time learning about your operating system’s TCP tuning parameters.
+
+Not only can open sockets be a problem, but the ones you’ve already closed can bite you too. After your application code closes a socket, the TCP stack moves it through a couple of terminal states. One of them is the TIME_WAIT state. TIME_WAIT is a delay period before the socket can be reused for a new connection. It’s there as part of TCP’s defense against bogons.
+
+### Expensive to Serve
+
+There is no effective defense against expensive users. They are not a direct stability risk, but the increased stress they produce increases the likelihood of triggering cracks elsewhere in the system. The best thing you can do about expensive users is test aggressively. Identify whatever your most expensive transactions are and double or triple the proportion of those transactions.
+
+### Remember This
+
+- **Users consume memory.** Each user’s session requires some memory. Minimize that memory to improve your capacity. Use a session only for caching so you can purge the session’s contents if memory gets tight.
+- **Users do weird, radom things.**
+- **Malicious users are out there.** Become intimate with your network design; it should help avert attacks.
+- **Users will gang up on you.** Run special stress tests to hammer deep links or hot URLs.
+
+## Blocked Threads
+
+### Remember this
+
+- **Recall that the Blocked Threads anti-pattern is the proximate cause of failures.** The Blocked Threads anti-pattern leads to Chain Reactions and Cascading Failures anti-patterns.
+- **Scrutinized resource pools.**
+- **Use power primitives.** Any library of concurrency utilities has more testing than your newborn queue.
+- **Defend with Timeout.**
+- **Beware the code you cannot see.**
+
+## Self-Denial Attacks
 
 # Words
 
@@ -104,12 +171,26 @@ The dominant architectural style today is the horizontally scaled farm of commod
 24. lingua france
 25. plugged
 26. propagate
+27. accelerating
+28. bulkhead
+29. resilience
+30. capacity
+31. midstream
+32. machinery
+33. malicious
+34. descendant
+35. invalidation
+36. beware
 
 # Sentence
 
 1. A postmortem is like a murder mystery. You have a set of clues. Some are reliable, such as server log copied from the time of the outage. Some are unreliable, such as statements from people about what they saw. The postmortem can actually be harder to solve than a murder, because the body goes away.
 2. In other words, once you know where to look, it's simple to make a test that finds it.
 3. A stand-alone system that doesn't integrate with anything else is rare, not to mention being almost useless.
+4. Just like we draw trees upside-down with their roots pointing to the sky, our problems cascade upward through the layers.
+5. In other words, the garbage collector will take advantage of all the help you give it before it gives up.
+6. Users in the real world do things that you won't predict or sometimes understand.
+7. Every cache should have an invalidation strategy to remove items from cache when its source data changes.
 
 第 1 章 生产环境的生存法则 1
 1.1 瞄准正确的目标 1
