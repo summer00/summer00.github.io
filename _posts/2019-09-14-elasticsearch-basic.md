@@ -318,21 +318,23 @@ es 使用：term frequency/inverse document frequency 算法，简写为 TF/IDF
 
 1. 使用批量请求批量请求将产生比单文档索引请求好得多的性能
 2. 充分利用 es 的分布式特性，从多个线程或进程发送数据
-3. 调大 refresh interval
+3. 使用自动生成的 id（auto-generated ids），设置的id需要去验证id是否已存在去更新
 4. 加载大量数据时禁用 refresh 和 replicas（可能造成数据丢失的危险，完成后恢复原始值）
-5. 为 filesystem cache 分配一半的物理内存
-6. 使用自动生成的 id（auto-generated ids）
-7. 加大 indexing buffer size
+5. 配置修改
+   1. 调大 refresh interval
+   2. 为 filesystem cache 分配一半的物理内存
+   3. 加大 indexing buffer size
 
 ## 搜索速度
 
-1. filesystem cache 越大越好
-2. 用更好的硬件
-3. 文档模型（document modeling），避免 join 查询
-4. 预索引 数据，将经常进行的查询做更多的优化处理
-5. Mappings（能用 keyword 最好了）
-6. 避免运行脚本
-7. 搜索 rounded 日期
-8. 强制 merge 只读的 index，只读的 index 可以从“merge 成 一个单独的 大 segment”中收益
-9. 预热 filesystem cache
-10. 使用 preference 来优化高速缓存利用率。例如，使用标识当前用户或会话的优选值可以帮助优化高速缓存的使用
+1. document不要过大
+2. filesystem cache 越大越好
+3. 用更好的硬件
+4. 文档模型（document modeling），避免 join 查询
+5. 预索引 数据，将经常进行的查询做更多的优化处理
+6. Mappings 设置，合理使用字段类型、索引字段，减小索引大小，对不需要搜索的字段设置为 keyword
+7. 避免运行脚本
+8. 搜索 rounded 日期
+9. 强制 merge 只读的 index，只读的 index 可以从“merge 成 一个单独的 大 segment”中收益
+10. 预热 filesystem cache
+11. 使用 preference 来优化高速缓存利用率。例如，使用标识当前用户或会话的优选值可以帮助优化高速缓存的使用

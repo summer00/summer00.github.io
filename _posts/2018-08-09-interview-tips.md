@@ -283,23 +283,22 @@ JDK1.8 后，字符串常量池从永久代移动到了元数据区。为什么�
 1. RUNNABLE 与 BLOCKED 的状态转换：只有一种场景会触发这种转换，就是线程等待 synchronized 的隐式锁。synchronized 修饰的方法、代码块同一时刻只允许一个线程执行，其他线程只能等待，这种情况下，等待的线程就会从 RUNNABLE 转换到 BLOCKED 状态。而当等待的线程获得 synchronized 隐式锁时，就又会从 BLOCKED 转换到 RUNNABLE 状态
 2. RUNNABLE 与 WAITING 的状态转换：
 
-- 获得 synchronized 隐式锁的线程，调用无参数的 Object.wait() 方法
-- 调用无参数的 Thread.join() 方法
-- 调用 LockSupport.park() 方法。其中的 LockSupport 对象，也许你有点陌生，其实 Java 并发包中的锁，都是基于它实现的。调用 LockSupport.park() 方法，当前线程会阻塞，线程的状态会从 RUNNABLE 转换到 WAITING。调用 LockSupport.unpark(Thread thread) 可唤醒目标线程，目标线程的状态又会从 WAITING 状态转换到 RUNNABLE
+   - 获得 synchronized 隐式锁的线程，调用无参数的 Object.wait() 方法
+   - 调用无参数的 Thread.join() 方法
+   - 调用 LockSupport.park() 方法。其中的 LockSupport 对象，也许你有点陌生，其实 Java 并发包中的锁，都是基于它实现的。调用 LockSupport.park() 方法，当前线程会阻塞，线程的状态会从 RUNNABLE 转换到 WAITING。调用 LockSupport.unpark(Thread thread) 可唤醒目标线程，目标线程的状态又会从 WAITING 状态转换到 RUNNABLE
 
 3. RUNNABLE 与 TIMED_WAITING 的状态转换
 
-- 调用带超时参数的 Thread.sleep(long millis) 方法
-- 获得 synchronized 隐式锁的线程，调用带超时参数的 Object.wait(long timeout) 方法
-- 调用带超时参数的 Thread.join(long millis) 方法
-- 调用带超时参数的 LockSupport.parkNanos(Object blocker, long deadline) 方法
-- 调用带超时参数的 LockSupport.parkUntil(long deadline) 方法
+   - 调用带超时参数的 Thread.sleep(long millis) 方法
+   - 获得 synchronized 隐式锁的线程，调用带超时参数的 Object.wait(long timeout) 方法
+   - 调用带超时参数的 Thread.join(long millis) 方法
+   - 调用带超时参数的 LockSupport.parkNanos(Object blocker, long deadline) 方法
+   - 调用带超时参数的 LockSupport.parkUntil(long deadline) 方法
 
 4. 从 NEW 到 RUNNABLE 状态
 5. 从 RUNNABLE 到 TERMINATED 状态
-
-- 运行完成后 或 抛出异常
-- 强制终止：`stop()` `interrupt()`。被 interrupt 的线程可以通过异常或主动检测的方式收到通知。
+   - 运行完成后 或 抛出异常
+   - 强制终止：`stop()` `interrupt()`。被 interrupt 的线程可以通过异常或主动检测的方式收到通知。
 
 ## 悲观锁和乐观锁的区别
 
@@ -633,7 +632,7 @@ Docker 和传统虚拟化方式的不同之处。传统虚拟机技术是虚拟�
 
 ## HTTP
 
-HTTP是应用层协议
+HTTP 是应用层协议
 
 **HTTP 1.0**
 

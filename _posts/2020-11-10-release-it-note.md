@@ -64,7 +64,7 @@ Every single one of those feeds presents a stability risk. Every socket, process
 4. Handshaking
 5. Test Harnesses
 
-**Remember this**
+### Remember This
 
 1. **Beware this necessary evil**
 2. **Prepare for the many forms of failure**
@@ -76,7 +76,7 @@ Every single one of those feeds presents a stability risk. Every socket, process
 
 The dominant architectural style today is the horizontally scaled farm of commodity hardware. A chain reaction occurs when an application has some defect -- usually a resource leak or a load-related crash.
 
-### Remember This:
+### Remember This
 
 - **Recognize that one server down jeopardizes the rest.**
 - **Hunt for resource leaks.** Most of time, a chain reaction happens when your application has a memory leak.
@@ -88,7 +88,7 @@ The dominant architectural style today is the horizontally scaled farm of commod
 
 Cascading failures often result from resource pools that get drained because of a failure in a lower layer. Integration points without timeouts are a surefire way to create cascading failures.
 
-### Remember This:
+### Remember This
 
 - **Stop cracks from jumping the gap.** Your system surely calls out to other enterprise systems; make sure you can stay up when they go down.
 - Scrutinize resource pools. Safe resource pool always limit the time a thread can wait to check out a resource.
@@ -133,7 +133,7 @@ There is no effective defense against expensive users. They are not a direct sta
 
 ## Blocked Threads
 
-### Remember this
+### Remember This
 
 - **Recall that the Blocked Threads anti-pattern is the proximate cause of failures.** The Blocked Threads anti-pattern leads to Chain Reactions and Cascading Failures anti-patterns.
 - **Scrutinized resource pools.**
@@ -142,6 +142,48 @@ There is no effective defense against expensive users. They are not a direct sta
 - **Beware the code you cannot see.**
 
 ## Self-Denial Attacks
+
+The classic example of a self-denial attack is the email from marketing to a “select group of users” that contains some privileged information or offer. These things replicate faster than the Anna Kournikova Trojan (or the Morris worm, if you’re really old school). Any special offer meant for a group of 10,000 users is guaranteed to attract millions. The community of networked bargain hunters can detect and share a reusable coupon code in milliseconds.
+
+Not every self-inflicted wound can be blamed on the marketing department (although we sure can try). In a horizontal layer that has some shared resources, it’s possible for a single rogue server to damage all the others.
+
+You can avoid machine-induced self-denial by building a “shared-nothing” architecture.
+
+### Remember This
+
+- **Keep the lines of communication open.** Self-denial attacks originate inside your own organization, when people cause self-inflicted wounds by creating their own flash mobs and traffic spikes. You can aid and abet these marketing efforts and protect your system at the same time, but only if you know what’s coming.
+- **Protect shared resources.** Programming errors, unexpected scaling effects, and shared resources all create risks when traffic surges.
+- **Expect rapid redistribution of any cool or valuable offer.**
+
+## Scaling Effects
+
+We run into such scaling effects all the time. Anytime you have a “many-to-one” or “many-to-few” relationship, you can be hit by scaling effects when one side increases.
+
+### Point-to-Point Communications
+
+Point-to-point communication between machines probably works just fine when only one or two instances are communicating. With point-to-point connections, each instance has to talk directly to every other instance. Scale that up to a hundred instances, and the O(n^2) scaling becomes quite painful.
+
+Depending on your infrastructure, you can replace point-to-point communication with the following:
+
+- UDP broadcasts
+- TCP or UDP multicast
+- Publish/subscribe messaging
+- Message queues
+
+### Shared Resources
+
+Commonly seen in the guise of a service-oriented architecture or “common services” project, the shared resource is some facility that all members of a horizontally scalable layer need to use. When the shared resource gets overloaded, it’ll become a bottleneck limiting capacity.
+
+The most scalable architecture is the shared-nothing architecture. Each server operates independently, without need for coordination or calls to any centralized services. In a shared nothing architecture, capacity scales more or less linearly with the number of servers.
+
+### Remember This
+
+- **Examine production versus QA environments to spot Scaling Effects.** Patterns that work fine in small environments or one-to-one environments might slow down or fail completely when you move to production sizes.
+- **Watch out for point-to-point communication.** Once you’re dealing with tens of servers, you will probably need to replace it with some kind of one-to-many communication.
+- **Watch out for shared resources.** If your system must use some sort of shared resource, stress-test it heavily. Also, be sure its clients will keep working if the shared resource gets slow or locks up.
+
+## Unbalanced Capacities
+
 
 # Words
 
@@ -181,6 +223,10 @@ There is no effective defense against expensive users. They are not a direct sta
 34. descendant
 35. invalidation
 36. beware
+37. bottleneck
+38. miserably
+39. distinguish
+40. fan-in
 
 # Sentence
 
@@ -191,6 +237,7 @@ There is no effective defense against expensive users. They are not a direct sta
 5. In other words, the garbage collector will take advantage of all the help you give it before it gives up.
 6. Users in the real world do things that you won't predict or sometimes understand.
 7. Every cache should have an invalidation strategy to remove items from cache when its source data changes.
+8. As the site scales horizontally, the lock manager becomes a bottleneck then finally a risk.
 
 第 1 章 生产环境的生存法则 1
 1.1 瞄准正确的目标 1
