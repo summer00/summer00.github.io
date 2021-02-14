@@ -331,7 +331,7 @@ es 使用：term frequency/inverse document frequency 算法，简写为 TF/IDF
 2. filesystem cache 越大越好
 3. 用更好的硬件
 4. 文档模型（document modeling），避免 join 查询
-5. 预索引 数据，将经常进行的查询做更多的优化处理
+5. 预索引数据，将经常进行的查询做更多的优化处理
 6. Mappings 设置，合理使用字段类型、索引字段，减小索引大小，对不需要搜索的字段设置为 keyword
 7. 避免运行脚本
 8. 搜索 rounded 日期
