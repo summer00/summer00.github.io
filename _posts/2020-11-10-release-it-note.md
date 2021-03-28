@@ -184,6 +184,39 @@ The most scalable architecture is the shared-nothing architecture. Each server o
 
 ## Unbalanced Capacities
 
+If you can’t build every service large enough to meet the potentially over- whelming demand from the front end, then you must build both callers and providers to be resilient in the face of a tsunami of requests. For the caller, Circuit Breaker will help by relieving the pressure on downstream services when responses get slow or connections get refused. For service providers, use Handshaking and Backpressure to inform callers to throttle back on the requests. Also consider Bulkheads to reserve capacity for high-priority callers of critical services.
+
+### Drive Out Through Testing
+
+- Use capacity modeling to make sure you're at least in the ballpark.
+- Don't just test your system with your usual workloads.
+- If you can, use autoscaling to react to surging demand.
+
+### Remember This
+
+- Examine server and thread counts. Check the ratio of front-end to back-end servers, along with the number of threads each side can handle in production compared to QA.
+- Observe near scaling effects and users.
+- Virtualize QA and scale it up. Even if your production environment is a fixed size, don’t let your QA languish at a measly pair of servers. Scale it up. Try test cases where you scale the caller and provider to different ratios. You should be able to automate this all through your data center automation tools.
+- Stress both sides of the interface. If you provide the back-end system, see what happens if it suddenly gets ten times the highest-ever demand, hitting the most expensive transaction.If you provide the front-end system, see what happens if calls to the back end stop responding or get very slow.
+
+## Dogpile
+
+“Dogpile” is a term from American football in which the ball-carrier gets compressed at the base of a giant pyramid of steroid-infused flesh.
+
+A dogpile can occur in several different situations:
+
+- When booting up several servers, such as after a code upgrade and restart
+- When a cron job triggers at midnight (or on the hour for any hour, really)
+- When the configuration management system pushes out a change
+- Dogpiles can also occur when some external phenomenon causes a synchronized “pulse” of traffic.
+
+### Remember This
+
+- Dog-piles force you to spend too much to handle peak demand.
+- Use random clock slew to diffuse the demand.
+- Use increasing back-off times to avoid pulsing. Use a back-off algorithm so different callers will be at different points in their back-off periods.
+
+## Force Multiplier
 
 # Words
 
@@ -227,6 +260,9 @@ The most scalable architecture is the shared-nothing architecture. Each server o
 38. miserably
 39. distinguish
 40. fan-in
+41. relieving
+42. drive out
+43. outage
 
 # Sentence
 
