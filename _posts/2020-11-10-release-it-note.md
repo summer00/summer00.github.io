@@ -194,10 +194,10 @@ If you can’t build every service large enough to meet the potentially over- wh
 
 ### Remember This
 
-- Examine server and thread counts. Check the ratio of front-end to back-end servers, along with the number of threads each side can handle in production compared to QA.
-- Observe near scaling effects and users.
-- Virtualize QA and scale it up. Even if your production environment is a fixed size, don’t let your QA languish at a measly pair of servers. Scale it up. Try test cases where you scale the caller and provider to different ratios. You should be able to automate this all through your data center automation tools.
-- Stress both sides of the interface. If you provide the back-end system, see what happens if it suddenly gets ten times the highest-ever demand, hitting the most expensive transaction.If you provide the front-end system, see what happens if calls to the back end stop responding or get very slow.
+- **Examine server and thread counts.** Check the ratio of front-end to back-end servers, along with the number of threads each side can handle in production compared to QA.
+- **Observe near scaling effects and users.**
+- **Virtualize QA and scale it up.** Even if your production environment is a fixed size, don’t let your QA languish at a measly pair of servers. Scale it up. Try test cases where you scale the caller and provider to different ratios. You should be able to automate this all through your data center automation tools.
+- **Stress both sides of the interface.** If you provide the back-end system, see what happens if it suddenly gets ten times the highest-ever demand, hitting the most expensive transaction.If you provide the front-end system, see what happens if calls to the back end stop responding or get very slow.
 
 ## Dogpile
 
@@ -212,11 +212,32 @@ A dogpile can occur in several different situations:
 
 ### Remember This
 
-- Dog-piles force you to spend too much to handle peak demand.
-- Use random clock slew to diffuse the demand.
-- Use increasing back-off times to avoid pulsing. Use a back-off algorithm so different callers will be at different points in their back-off periods.
+- **Dog-piles force you to spend too much to handle peak demand.**
+- **Use random clock slew to diffuse the demand.**
+- **Use increasing back-off times to avoid pulsing.** Use a back-off algorithm so different callers will be at different points in their back-off periods.
 
 ## Force Multiplier
+
+### Remember This
+
+- **Ask for help before causing havoc.** Infrastructure management tools can make very large impacts very quickly. Build limiters and safeguards into them so they won’t destroy your whole system at once.
+- **Beware of lag time and momentum.** Actions initiated by automation take time. That time is usually longer than a monitoring interval, so make sure to account for some delay in the system’s response to the action.
+- **Beware of illusions and superstitions.**
+
+## Slow Responses
+
+Generating a slow response is worse than refusing a connection or returning an error, particularly in the context of middle-layer services. A slow response, on the other hand, ties up resources in the calling system and the called system. Slow responses tend to propagate upward from layer to layer in a gradual form of cascading failure.
+
+### Remember This
+
+- **Slow Responses trigger Cascading Failures.**
+- **For websites, Slow Responses cause more traffic.** Users waiting for pages frequently hit the Reload button, generating even more traffic to your already overloaded system.
+- **Consider Fail Fast.**
+- **Hunt for memory leaks or resource contention.**
+
+## Unbounded Result Sets
+
+Design with skepticism, and you will achieve resilience. A healthy dose of skepticism will help your application dodge a bullet or two.
 
 # Words
 
@@ -263,6 +284,11 @@ A dogpile can occur in several different situations:
 41. relieving
 42. drive out
 43. outage
+44. likewise
+45. rotate
+46. rapidly
+47. chatty
+48. dodge
 
 # Sentence
 
@@ -274,6 +300,8 @@ A dogpile can occur in several different situations:
 6. Users in the real world do things that you won't predict or sometimes understand.
 7. Every cache should have an invalidation strategy to remove items from cache when its source data changes.
 8. As the site scales horizontally, the lock manager becomes a bottleneck then finally a risk.
+9. This will appear as a high CPU utilization, but it is all due to garbage collection, not work on the transactions themselves.
+10. Design with skepticism, and you will achieve resilience.
 
 第 1 章 生产环境的生存法则 1
 1.1 瞄准正确的目标 1
