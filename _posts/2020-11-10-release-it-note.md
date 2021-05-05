@@ -239,6 +239,15 @@ Generating a slow response is worse than refusing a connection or returning an e
 
 Design with skepticism, and you will achieve resilience. A healthy dose of skepticism will help your application dodge a bullet or two.
 
+### Remember This
+
+- **Use realistic data volumes.**
+- **Paginate at the front end.**
+- **Don't rely on the data producers.** Don’t rely on the data producers to create a limited amount of data.
+- **Put limits into other application-level protocols.** Service calls, RMI, DCOM, XML-RPC, and any other kind of request/reply call are vulnerable to returning huge collections of objects, thereby consuming too much memory.
+
+# Stability Pattern
+
 # Words
 
 1. dominant
@@ -289,6 +298,9 @@ Design with skepticism, and you will achieve resilience. A healthy dose of skept
 46. rapidly
 47. chatty
 48. dodge
+49. novel
+50. dictate
+51. thereby
 
 # Sentence
 
@@ -303,6 +315,7 @@ Design with skepticism, and you will achieve resilience. A healthy dose of skept
 9. This will appear as a high CPU utilization, but it is all due to garbage collection, not work on the transactions themselves.
 10. Design with skepticism, and you will achieve resilience.
 
+```
 第 1 章 生产环境的生存法则 1
 1.1 瞄准正确的目标 1
 1.2 应对不断扩大的挑战范围 2
@@ -552,3 +565,4 @@ Design with skepticism, and you will achieve resilience. A healthy dose of skept
 17.4.5 自动和重复 269
 17.5 从人的方面模拟灾难 270
 17.6 小结 271
+```
