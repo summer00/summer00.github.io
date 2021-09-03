@@ -9,7 +9,7 @@ categories: [book-note]
 Software design as taught today is terribly incomplete. It only talks about what systems should do. It doesn't address the converse - what systems should not do.
 
 Most software is designed for the development lab or the testers in the QA department. Testing - even agile, pragmatic, automated testing - is not enough to prove that software is ready for the real world.
-设计
+
 ## The scope of the challenge
 
 1. large active user counts
